@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "340764254386",
+    "firebase_url": "https://brightcarrotbeta.firebaseio.com",
+    "project_id": "brightcarrotbeta",
+    "storage_bucket": "brightcarrotbeta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340764254386:android:c7ba09609bc5a94c",
+        "android_client_info": {
+          "package_name": "com.example.ravipavansne.brightcarrot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "340764254386-6dmqshc2brbka9vcb6c0b37hvhjdnhie.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ravipavansne.brightcarrot",
+            "certificate_hash": "50fe64bb22ef3ee8c17b22ded33fd11b24bccf27"
+          }
+        },
+        {
+          "client_id": "340764254386-sv8hnus6m88bdlsaa5tvf1u9qo9bia8e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ravipavansne.brightcarrot",
+            "certificate_hash": "1fff7612dc973edadc2621553a8d6ab43dee23db"
+          }
+        },
+        {
+          "client_id": "340764254386-3hdn2ptd6qkvgf9i29h0t9r4035lrp7r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhGJ6_iww6ldOIB1UDmtzPNI24F_zkHjg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "340764254386-3hdn2ptd6qkvgf9i29h0t9r4035lrp7r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
