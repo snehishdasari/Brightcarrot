@@ -1,8 +1,11 @@
 package com.example.ravipavansne.brightcarrot;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ public class SignupActivity extends AppCompatActivity {
     private Spinner day ;
     private Spinner month ;
     private Spinner year ;
+    private Button getlink ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +66,14 @@ public class SignupActivity extends AppCompatActivity {
         year.setAdapter(yearadapter) ;
 
 
+        getlink = (Button) findViewById(R.id.dummy) ;
 
+        getlink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignupActivity.this,HomeActivity.class));
+             }
+        });
 
 
 
