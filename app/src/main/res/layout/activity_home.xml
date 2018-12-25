@@ -24,20 +24,29 @@
         android:id="@+id/combo"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:id="@+id/nav_frame"></FrameLayout>
 
-    <android.support.design.widget.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:id="@+id/bottomnav"
-        android:layout_below="@id/nav_frame"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_nav_items"
-        android:background="@color/colorPrimaryDark"></android.support.design.widget.BottomNavigationView>
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/main_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <include
+                android:id="@+id/main_page_app_bar"
+                layout="@layout/app_bar_layout"></include>
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/main_tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.design.widget.TabLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/tab_pager"
+            android:layout_width="match_parent"
+            android:layout_below="@id/main_app_bar"
+            android:layout_height="wrap_content"></android.support.v4.view.ViewPager>
 
     </RelativeLayout>
 </android.support.v4.widget.DrawerLayout>
