@@ -26,6 +26,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private ViewPager viewPager ;
     private TabLayout tabLayout ;
     private int k=0;
+    private int g=0;
 
 
 
