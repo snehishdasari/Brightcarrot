@@ -16,6 +16,7 @@ public class BikesFragment extends Fragment {
 
     public BikesFragment() {
         // Required empty public constructor
+        int x;
     }
 
 
