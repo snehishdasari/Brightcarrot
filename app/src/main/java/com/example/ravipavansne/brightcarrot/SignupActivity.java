@@ -70,7 +70,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getApplicationContext(),signup2Activity.class));
+                startActivity(new Intent(getApplicationContext(),Home2Activity.class));
 
             }
         });
