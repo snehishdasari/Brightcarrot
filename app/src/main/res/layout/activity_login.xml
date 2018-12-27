@@ -71,6 +71,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="25dp"
                 android:padding="10dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/roundbutton"
                 android:fontFamily="@font/acme"
                 android:id="@+id/loginbutt"
                 android:textSize="18sp"
