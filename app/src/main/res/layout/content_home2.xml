@@ -4,11 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UpcomingridesActivity">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Home2Activity"
+    tools:showIn="@layout/app_bar_home2">
 
-    <TextView
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/tab_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Upcomng rides"/>
+        android:layout_below="@id/main_app_bar"
+        android:layout_height="wrap_content"></android.support.v4.view.ViewPager>
+
 
 </RelativeLayout>

@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                             if(firebaseAuth.getCurrentUser().isEmailVerified())
                             {
                                 Toast.makeText(LoginActivity.this, "login successful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                                startActivity(new Intent(getApplicationContext(),Home2Activity.class));
                             }
                             else
                             {
