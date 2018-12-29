@@ -1,13 +1,25 @@
 package com.example.ravipavansne.brightcarrot;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +40,15 @@ public class SignupActivity extends AppCompatActivity {
     private JSONArray citieslist;
     private ArrayList<String> states;
     private ArrayList<String> cities;
+    private userdetails curruserdetails;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+    private TextInputLayout firstname ;
+    private TextInputLayout lastname ;
+    private TextInputLayout phonenumber ;
+    private TextInputLayout address ;
+    private FirebaseUser firebaseUser ;
+    private ProgressDialog progressDialog ;
 
 
     @Override
@@ -169,13 +190,77 @@ public class SignupActivity extends AppCompatActivity {
         ArrayAdapter<String> citiesadapter= new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,cities) ;
         city.setAdapter(citiesadapter);
 
+
+        firstname = (TextInputLayout) findViewById(R.id.firstnameid) ;
+        lastname = (TextInputLayout) findViewById(R.id.lastnameid) ;
+        phonenumber=(TextInputLayout) findViewById(R.id.phonenumberid) ;
+        address=(TextInputLayout) findViewById(R.id.addressid) ;
+
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+
+        progressDialog  = new ProgressDialog(this) ;
+
+
+
         Button butt = (Button)findViewById(R.id.next);
         butt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getApplicationContext(),Home2Activity.class));
+                String fname = firstname.getEditText().getText().toString();
+                String lname = lastname.getEditText().getText().toString();
+                String mobileno = phonenumber.getEditText().getText().toString();
+                String addrs = address.getEditText().getText().toString();
+                String dayofbirth = day.getSelectedItem().toString();
+                String monthofbirth = month.getSelectedItem().toString();
+                String yearofbirth = year.getSelectedItem().toString();
+                String state1 = state.getSelectedItem().toString();
+                String city1 = city.getSelectedItem().toString();
+                boolean flag = false;
+                firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                String email = firebaseUser.getEmail();
+                if (!TextUtils.isEmpty(fname) || !TextUtils.isEmpty(lname) || !TextUtils.isEmpty(mobileno) || !TextUtils.isEmpty(addrs) || !TextUtils.isEmpty(dayofbirth) || !TextUtils.isEmpty(monthofbirth) || !TextUtils.isEmpty(yearofbirth) || !TextUtils.isEmpty(state1) || !TextUtils.isEmpty(city1)) {
 
+
+                    progressDialog.setTitle("Registering User");
+                    progressDialog.setMessage("Please wait while we create your account");
+                    progressDialog.setCanceledOnTouchOutside(false);
+                    progressDialog.show();
+
+
+
+
+                    userdetails u1 = new userdetails(fname, lname, addrs, mobileno, dayofbirth, monthofbirth, yearofbirth, state1, city1, email, flag);
+                    u1.setFlag(true);
+                    String id = firebaseUser.getUid();
+                    databaseReference = firebaseDatabase.getReference().child("Users").child(id);
+                    databaseReference.setValue(u1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+
+                                progressDialog.dismiss();
+
+                                Intent k = new Intent(getApplicationContext(), Home2Activity.class) ;
+                                startActivity(k);
+                                k.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK) ;
+                                finish();
+
+                            }
+
+                            else
+                            {
+                                progressDialog.hide();
+                                Toast.makeText(SignupActivity.this,"YOu have some error",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+
+
+
+                }
             }
         });
 
