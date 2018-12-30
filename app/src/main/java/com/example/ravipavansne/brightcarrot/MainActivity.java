@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser fuser;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +34,11 @@ public class MainActivity extends AppCompatActivity {
         linearLayout = (LinearLayout) findViewById(R.id.sign) ;
         slideradapter1 = new slideradapter(this) ;
         viewPager.setAdapter(slideradapter1) ;
-
+        fuser= FirebaseAuth.getInstance().getCurrentUser() ;
+        if(fuser!=null)
+        {
+            startActivity(new Intent(MainActivity.this,Home2Activity.class));
+        }
         signbutton = (Button) findViewById(R.id.signbutton) ;
         loginbutton = (Button) findViewById(R.id.loginbutton) ;
         signbutton.setOnClickListener(new View.OnClickListener() {
