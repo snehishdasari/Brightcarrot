@@ -13,6 +13,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -20,6 +26,9 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText pass;
     private Button butt;
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference ;
+    private userdetails u1 ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +51,33 @@ public class LoginActivity extends AppCompatActivity {
                         {
                             if(firebaseAuth.getCurrentUser().isEmailVerified())
                             {
-                                Toast.makeText(LoginActivity.this, "login successful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(),Home2Activity.class));
+                                Toast.makeText(LoginActivity.this, "login successful", Toast.LENGTH_SHORT).show()
+                                ;
+                                String id = firebaseAuth.getCurrentUser().getUid() ;
+                                databaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+                                databaseReference.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        String flag = dataSnapshot.child("flag").getValue().toString() ;
+                                        if(flag=="true")
+                                        {
+                                            startActivity(new Intent(LoginActivity.this,Home2Activity.class)) ;
+
+                                        }
+                                        else
+                                        {
+                                            startActivity(new Intent(LoginActivity.this,SignupActivity.class));
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+
+
                             }
                             else
                             {

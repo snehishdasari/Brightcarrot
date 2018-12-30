@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class signup2Activity extends AppCompatActivity {
 
@@ -22,6 +24,7 @@ public class signup2Activity extends AppCompatActivity {
     private TextInputEditText cpass;
     private Button butt;
     private FirebaseAuth firebaseAuth;
+    private userdetails u1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,7 @@ public class signup2Activity extends AppCompatActivity {
         butt=(Button)findViewById(R.id.butt);
         firebaseAuth=FirebaseAuth.getInstance();
 
-
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         butt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +53,9 @@ public class signup2Activity extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 Toast.makeText(signup2Activity.this, "Signed up successfully and please verify your email", Toast.LENGTH_SHORT).show();
                                 FirebaseUser user = firebaseAuth.getCurrentUser();
+                                u1=new userdetails();
+                                u1.setFlag(false);
+                                databaseReference.child("Users").child(user.getUid()).setValue(u1);
                                 user.sendEmailVerification();
                                 startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                                 }
