@@ -12,6 +12,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MyaccountActivity extends AppCompatActivity {
 
     private Toolbar toolbar ;
+    private  int k=0;
     private CircleImageView backaarrow;
 
     @Override
