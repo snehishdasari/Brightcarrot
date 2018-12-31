@@ -41,7 +41,7 @@ public class CarsFragment extends Fragment {
 
         // Inflate the layout for this fragment
         List<Vehicles> list = new ArrayList<Vehicles>() ;
-        list.add(new Vehicles("name of the vehicle","Bla bla bla vla bla bla bla bla bla bla ablbal",1000,R.drawable.background,"27jan","31jan",4));
+        list.add(new Vehicles("name of the vehicle","Bla bla bla vla bla bla bla bla bla bla ",1000,R.drawable.background,"27jan","31jan",4));
         list.add(new Vehicles("name of the vehicle","Bla bla bla vla bla bla bla bla bla bla ablbal",1000,R.drawable.background,"27jan","31jan",4));
         list.add(new Vehicles("name of the vehicle","Bla bla bla vla bla bla bla bla bla bla ablbal",1000,R.drawable.background,"27jan","31jan",4));
         VehicleAdapter vehicleAdapter = new VehicleAdapter(getContext(),list) ;

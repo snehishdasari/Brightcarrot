@@ -1,12 +1,14 @@
 package com.example.ravipavansne.brightcarrot;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference ;
     private userdetails u1 ;
-
+    private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,14 @@ public class LoginActivity extends AppCompatActivity {
         email=(TextInputEditText)findViewById(R.id.loginemail);
         pass=(TextInputEditText)findViewById(R.id.loginpass);
         butt=(Button)findViewById(R.id.loginbutt);
+        textView = (TextView)findViewById(R.id.notuser);
+        textView.setPaintFlags(textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            }
+        });
 
         firebaseAuth=FirebaseAuth.getInstance();
         butt.setOnClickListener(new View.OnClickListener() {
@@ -61,12 +71,18 @@ public class LoginActivity extends AppCompatActivity {
                                         String flag = dataSnapshot.child("flag").getValue().toString() ;
                                         if(flag=="true")
                                         {
-                                            startActivity(new Intent(LoginActivity.this,Home2Activity.class)) ;
+                                            Intent i = new Intent(LoginActivity.this,Home2Activity.class) ;
+                                            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(i);
+                                            finish();
 
                                         }
                                         else
                                         {
-                                            startActivity(new Intent(LoginActivity.this,SignupActivity.class));
+                                            Intent i = new Intent(LoginActivity.this,SignupActivity.class);
+                                            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(i);
+                                            finish();
                                         }
                                     }
 
