@@ -29,7 +29,7 @@ public class MyaccountActivity extends AppCompatActivity {
     private TextView address ;
     private FirebaseUser firebaseUser ;
     private DatabaseReference databaseReference ;
-    private TextView edit ;
+    private Button edit ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +46,10 @@ public class MyaccountActivity extends AppCompatActivity {
 
 
     first = (TextView) findViewById(R.id.firstid) ;
-    last = (TextView) findViewById(R.id.lastid) ;
     phone =(TextView) findViewById(R.id.phoneid ) ;
     dob = (TextView) findViewById(R.id.dobid) ;
     address= (TextView) findViewById(R.id.addrssid) ;
-    edit = (TextView) findViewById(R.id.edit ) ;
+    edit = (Button) findViewById(R.id.edit ) ;
     firebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
     databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()) ;
     databaseReference.addValueEventListener(new ValueEventListener() {
@@ -66,8 +65,7 @@ public class MyaccountActivity extends AppCompatActivity {
             String state = dataSnapshot.child("state").getValue().toString() ;
             String city = dataSnapshot.child("city").getValue().toString() ;
 
-            first.setText(fname);
-            last.setText(lname);
+            first.setText(fname+" "+lname);
             phone.setText(phoneno);
             dob.setText(date+"/"+month+"/"+year);
             address.setText(qaddress+","+city+"-"+state);
@@ -82,6 +80,8 @@ public class MyaccountActivity extends AppCompatActivity {
     edit.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+
+
             startActivity(new Intent(MyaccountActivity.this,SignupActivity.class));
         }
     });

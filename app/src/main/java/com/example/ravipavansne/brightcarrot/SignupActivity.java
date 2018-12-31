@@ -49,6 +49,7 @@ public class SignupActivity extends AppCompatActivity {
     private TextInputLayout address ;
     private FirebaseUser firebaseUser ;
     private ProgressDialog progressDialog ;
+    public static Button butt;
 
 
     @Override
@@ -204,7 +205,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
 
-        Button butt = (Button)findViewById(R.id.next);
+         butt = (Button)findViewById(R.id.next);
         butt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

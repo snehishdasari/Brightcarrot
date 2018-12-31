@@ -16,6 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class Home2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -23,6 +26,7 @@ public class Home2Activity extends AppCompatActivity
     private SectionsPagerAdapter sectionsPagerAdapter ;
     private ViewPager viewPager ;
     private TabLayout tabLayout ;
+    private FirebaseUser fuser;
 
 
     @Override
@@ -32,6 +36,7 @@ public class Home2Activity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +123,12 @@ public class Home2Activity extends AppCompatActivity
         }
         else if(id== R.id.logout_nav)
         {
-            startActivity(new Intent(Home2Activity.this,LoginActivity.class));
+
+            FirebaseAuth.getInstance().signOut();
+           Intent i = new Intent(Home2Activity.this,MainActivity.class);
+           i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+           startActivity(i);
+           finish();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

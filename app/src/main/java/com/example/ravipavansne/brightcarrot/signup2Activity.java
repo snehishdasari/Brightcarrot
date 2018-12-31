@@ -1,12 +1,14 @@
 package com.example.ravipavansne.brightcarrot;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +27,7 @@ public class signup2Activity extends AppCompatActivity {
     private Button butt;
     private FirebaseAuth firebaseAuth;
     private userdetails u1;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,14 @@ public class signup2Activity extends AppCompatActivity {
         cpass=(TextInputEditText)findViewById(R.id.cpass);
         butt=(Button)findViewById(R.id.butt);
         firebaseAuth=FirebaseAuth.getInstance();
+        textView = (TextView) findViewById(R.id.useralready);
+        textView.setPaintFlags(textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            }
+        });
 
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         butt.setOnClickListener(new View.OnClickListener() {

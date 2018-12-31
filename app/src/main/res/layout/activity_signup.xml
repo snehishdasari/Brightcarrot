@@ -21,6 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="First Name"
+                android:maxLines="1"
                 android:textColor="#ffffff"
                 android:drawableLeft="@drawable/ic_person_black_24dp"
                 android:drawablePadding="12dp"
@@ -41,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Last Name"
+            android:maxLines="1"
             android:textColor="#ffffff"
             android:drawableLeft="@drawable/ic_person_black_24dp"
             android:drawablePadding="12dp"
@@ -77,7 +79,9 @@
                 android:layout_margin="5dp"
                 android:id="@+id/spinneryear"
                 android:background="@android:color/white"
-                ></Spinner>
+                >
+
+            </Spinner>
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -85,7 +89,9 @@
                 android:layout_weight="1"
                 android:id="@+id/spinnermonth"
                 android:layout_margin="5dp"
-                ></Spinner>
+                >
+
+            </Spinner>
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -93,7 +99,9 @@
                 android:id="@+id/spinnerday"
                 android:background="@android:color/white"
                 android:layout_margin="5dp"
-                ></Spinner>
+                >
+
+            </Spinner>
         </LinearLayout>
 
 
@@ -111,6 +119,7 @@
             android:layout_height="match_parent"
             android:hint="Phone number"
             android:textColor="#ffffff"
+            android:maxLines="1"
             android:drawableLeft="@drawable/ic_phone_black_24dp"
             android:drawablePadding="12dp"
             android:layout_margin="12dp"
@@ -131,6 +140,7 @@
             android:hint="Complete Address"
             android:drawableLeft="@drawable/ic_home_black_24dp"
             android:drawablePadding="12dp"
+            android:maxLines="1"
             android:layout_margin="12dp"
             android:textColor="#ffffff"
             android:fontFamily="@font/acme"
@@ -165,7 +175,10 @@
                 android:layout_margin="5dp"
                 android:id="@+id/spinnerstate"
                 android:background="@android:color/white"
-                ></Spinner>
+                >
+
+            </Spinner>
+
             <Spinner
                 android:id="@+id/spinnercity"
                 android:layout_width="match_parent"
@@ -173,7 +186,9 @@
                 android:background="@android:color/white"
                 android:layout_weight="1"
                 android:layout_margin="5dp"
-                ></Spinner>
+                >
+
+            </Spinner>
 
         </LinearLayout>
 
@@ -190,7 +205,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="next"
+            android:text="Save!"
             android:background="@drawable/roundbutton"
             android:layout_marginLeft="60dp"
             android:textColor="#ffffff"
@@ -199,14 +214,7 @@
             android:layout_marginBottom="5dp"
             android:textSize="20dp"
             android:fontFamily="@font/acme"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Already a User? Login "
-            android:textSize="18sp"
-            android:fontFamily="@font/acme"
-            android:textAlignment="center"
-            android:textColor="#ffffff"/>
+
     </LinearLayout>
 
 
