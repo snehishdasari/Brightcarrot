@@ -14,6 +14,7 @@ public class userdetails {
     private String city;
     private String email ;
     private boolean flag;
+    private String id;
 
     public userdetails(String firstname, String lastname, String address, String phonenumber, String birthday, String birthmonth, String birthyear, String state, String city, String email, boolean flag) {
         this.firstname = firstname;
@@ -27,6 +28,14 @@ public class userdetails {
         this.city = city;
         this.email = email;
         this.flag = flag;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public boolean isFlag() {

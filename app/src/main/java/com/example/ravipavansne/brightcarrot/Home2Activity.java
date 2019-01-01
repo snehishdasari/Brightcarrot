@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,9 +17,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.w3c.dom.Text;
 
 public class Home2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -27,7 +33,7 @@ public class Home2Activity extends AppCompatActivity
     private ViewPager viewPager ;
     private TabLayout tabLayout ;
     private FirebaseUser fuser;
-
+    private userdetails presentuser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +119,49 @@ public class Home2Activity extends AppCompatActivity
         if (id == R.id.myaccount_nav) {
             startActivity(new Intent(Home2Activity.this,MyaccountActivity.class)) ;
         }
+        else if(id == R.id.changepass_nav){
+
+            AlertDialog.Builder mbuilder = new AlertDialog.Builder(Home2Activity.this);
+            View mview = getLayoutInflater().inflate(R.layout.changepassword,null);
+            final TextInputLayout t1 = (TextInputLayout) mview.findViewById(R.id.currpass);
+            final TextInputLayout t2 = (TextInputLayout) mview.findViewById(R.id.newpass);
+            final TextInputLayout t3 = (TextInputLayout) mview.findViewById(R.id.conpass);
+            Button change = (Button) mview.findViewById(R.id.change);
+            change.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                  String currpass = t1.getEditText().getText().toString();
+                    String newpass = t2.getEditText().getText().toString();
+                    String conpass = t3.getEditText().getText().toString();
+
+                if(currpass.isEmpty() || newpass.isEmpty() || conpass.isEmpty())
+                {
+                    Toast.makeText(Home2Activity.this, "Fields empty", Toast.LENGTH_SHORT).show();
+                }
+                else if(!(newpass.equals(conpass)))
+                {
+                    Toast.makeText(Home2Activity.this, "passwords don't nmatch", Toast.LENGTH_SHORT).show();
+                }
+                }
+
+                });
+                mbuilder.setView(mview);
+                AlertDialog dialog = mbuilder.create();
+                dialog.show();
+
+
+
+
+
+
+
+
+
+
+
+
+            }
         else if(id== R.id.previousrides_nav)
         {
             startActivity(new Intent(Home2Activity.this,PreviousridesActivity.class));
