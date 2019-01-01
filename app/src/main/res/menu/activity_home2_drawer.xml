@@ -9,6 +9,10 @@
 
             android:title="My Account" />
         <item
+            android:id="@+id/changepass_nav"
+            android:title="Change Password"
+            />
+        <item
             android:id="@+id/previousrides_nav"
 
             android:title="Previous Rides" />
