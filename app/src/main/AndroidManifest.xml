@@ -19,10 +19,10 @@
         <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".signup2Activity" />
-        <activity android:name=".MyaccountActivity" >
+        <activity android:name=".MyaccountActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVTY"
-                android:value=".Home2Activity"></meta-data>
+                android:value=".Home2Activity" />
         </activity>
         <activity android:name=".PreviousridesActivity" />
         <activity android:name=".MyvehiclesActivity" />
@@ -34,7 +34,8 @@
         <activity
             android:name=".Home2Activity"
             android:label="@string/title_activity_home2"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".VehicleFillingActivity"></activity>
     </application>
 
 </manifest>

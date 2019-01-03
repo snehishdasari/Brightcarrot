@@ -55,12 +55,12 @@ public class SignupActivity extends AppCompatActivity {
     public static Button butt;
     private String pass1;
     private DatabaseReference d;
-    private ArrayList<String> months;
-    private ArrayList<String> days;
-    private ArrayList<String> years;
-    private ArrayAdapter<String> dayadapter;
-    private ArrayAdapter<String> monthadapter;
-    private ArrayAdapter<String> yearadapter;
+        private ArrayList<String> months;
+        private ArrayList<String> days;
+        private ArrayList<String> years;
+        private ArrayAdapter<String> dayadapter;
+        private ArrayAdapter<String> monthadapter;
+        private ArrayAdapter<String> yearadapter;
     private String jsonfile;
     private ArrayAdapter<String> citiesadapter;
     private int count;
