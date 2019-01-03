@@ -1,7 +1,9 @@
 package com.example.ravipavansne.brightcarrot;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -18,10 +20,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -33,8 +43,10 @@ public class Home2Activity extends AppCompatActivity
     private ViewPager viewPager ;
     private TabLayout tabLayout ;
     private FirebaseUser fuser;
-    private userdetails presentuser;
-
+    private userdetails u1;
+    private String oldpass;
+    private ProgressDialog progressDialog;
+    private DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,29 +138,77 @@ public class Home2Activity extends AppCompatActivity
             final TextInputLayout t1 = (TextInputLayout) mview.findViewById(R.id.currpass);
             final TextInputLayout t2 = (TextInputLayout) mview.findViewById(R.id.newpass);
             final TextInputLayout t3 = (TextInputLayout) mview.findViewById(R.id.conpass);
+            ImageView imageView = (ImageView) mview.findViewById(R.id.closechangepass);
+
             Button change = (Button) mview.findViewById(R.id.change);
+
+             databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(fuser.getUid());
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    oldpass = dataSnapshot.child("password").getValue().toString();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
             change.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                   String currpass = t1.getEditText().getText().toString();
-                    String newpass = t2.getEditText().getText().toString();
+                    final String newpass = t2.getEditText().getText().toString();
                     String conpass = t3.getEditText().getText().toString();
-
+                    progressDialog = new ProgressDialog(Home2Activity.this);
+                    progressDialog.setTitle("Changing Password");
+                    progressDialog.setMessage("Please wait while we change your password");
+                    progressDialog.setCanceledOnTouchOutside(false);
+                    progressDialog.show();
                 if(currpass.isEmpty() || newpass.isEmpty() || conpass.isEmpty())
                 {
+                    progressDialog.hide();
                     Toast.makeText(Home2Activity.this, "Fields empty", Toast.LENGTH_SHORT).show();
                 }
+                else if(!(currpass.equals(oldpass))){
+                    progressDialog.hide();
+                        Toast.makeText(Home2Activity.this, "Wrong password", Toast.LENGTH_SHORT).show();
+                    }
                 else if(!(newpass.equals(conpass)))
                 {
+                    progressDialog.hide();
                     Toast.makeText(Home2Activity.this, "passwords don't nmatch", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    fuser.updatePassword(newpass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                                if(task.isSuccessful())
+                                {
+                                    databaseReference.child("password").setValue(newpass);
+                                    progressDialog.dismiss();
+                                }
+
+                        }
+                    });
                 }
                 }
 
                 });
                 mbuilder.setView(mview);
-                AlertDialog dialog = mbuilder.create();
+                final AlertDialog dialog = mbuilder.create();
+                dialog.setCanceledOnTouchOutside(false);
                 dialog.show();
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
 
 
 

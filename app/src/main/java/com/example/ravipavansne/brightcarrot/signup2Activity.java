@@ -52,7 +52,7 @@ public class signup2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                  String emailtext=email.getText().toString();
-                 String passtext=pass.getText().toString();
+                 final String passtext=pass.getText().toString();
                  String cpasstext=cpass.getText().toString();
 
                 if(passtext.equals(cpasstext))
@@ -66,12 +66,15 @@ public class signup2Activity extends AppCompatActivity {
                                 FirebaseUser user = firebaseAuth.getCurrentUser();
                                 u1=new userdetails();
                                 u1.setFlag(false);
+                                u1.setPassword(passtext);
                                 databaseReference.child("Users").child(user.getUid()).setValue(u1);
                                 user.sendEmailVerification();
                                 startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                                 }
-                             else
+                             else {
+
                                 Toast.makeText(signup2Activity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
                 }

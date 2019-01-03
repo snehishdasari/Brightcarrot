@@ -33,7 +33,7 @@
                 android:layout_height="match_parent"
                 android:textSize="20sp"
                 android:fontFamily="@font/acme"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:drawableLeft="@drawable/baseline_email_white_24"
                 android:drawablePadding="12dp"
                 android:layout_margin="12dp"

@@ -36,10 +36,12 @@ public class MainActivity extends AppCompatActivity {
         fuser= FirebaseAuth.getInstance().getCurrentUser() ;
         if(fuser!=null)
         {
+            if(fuser.isEmailVerified()){
             Intent i = new Intent(MainActivity.this,Home2Activity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
-            finish();
+            finish();}
+
         }
         signbutton = (Button) findViewById(R.id.signbutton) ;
         loginbutton = (Button) findViewById(R.id.loginbutton) ;

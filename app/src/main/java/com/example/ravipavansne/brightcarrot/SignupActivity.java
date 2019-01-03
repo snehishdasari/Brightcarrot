@@ -53,6 +53,7 @@ public class SignupActivity extends AppCompatActivity {
     private FirebaseUser firebaseUser ;
     private ProgressDialog progressDialog ;
     public static Button butt;
+    private String pass1;
     private DatabaseReference d;
     private ArrayList<String> months;
     private ArrayList<String> days;
@@ -221,18 +222,20 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                String fname = dataSnapshot.child("firstname").getValue().toString() ;
-                String lname = dataSnapshot.child("lastname").getValue().toString() ;
-                String phoneno = dataSnapshot.child("phonenumber").getValue().toString() ;
-                String date = dataSnapshot.child("birthday").getValue().toString() ;
-                String month1 = dataSnapshot.child("birthmonth").getValue().toString() ;
-                String year1 = dataSnapshot.child("birthyear").getValue().toString() ;
-                String qaddress = dataSnapshot.child("address").getValue().toString() ;
-                String state1 = dataSnapshot.child("state").getValue().toString() ;
-                String city1 = dataSnapshot.child("city").getValue().toString() ;
+
                  flag1 = dataSnapshot.child("flag").getValue().toString();
+                 pass1 = dataSnapshot.child("password").getValue().toString();
                 if(flag1.equals("true"))
                 {
+                    String fname = dataSnapshot.child("firstname").getValue().toString() ;
+                    String lname = dataSnapshot.child("lastname").getValue().toString() ;
+                    String phoneno = dataSnapshot.child("phonenumber").getValue().toString() ;
+                    String date = dataSnapshot.child("birthday").getValue().toString() ;
+                    String month1 = dataSnapshot.child("birthmonth").getValue().toString() ;
+                    String year1 = dataSnapshot.child("birthyear").getValue().toString() ;
+                    String qaddress = dataSnapshot.child("address").getValue().toString() ;
+                    String state1 = dataSnapshot.child("state").getValue().toString() ;
+                    String city1 = dataSnapshot.child("city").getValue().toString() ;
                     firstname.getEditText().setText(fname);
                     lastname.getEditText().setText(lname);
                     phonenumber.getEditText().setText(phoneno);
@@ -310,6 +313,7 @@ public class SignupActivity extends AppCompatActivity {
                      u1 = new userdetails(fname, lname, addrs, mobileno, dayofbirth, monthofbirth, yearofbirth, state1, city1, email, flag);
                     u1.setId(firebaseUser.getUid());
                     u1.setFlag(true);
+                    u1.setPassword(pass1);
 
 
                     databaseReference.setValue(u1).addOnCompleteListener(new OnCompleteListener<Void>() {

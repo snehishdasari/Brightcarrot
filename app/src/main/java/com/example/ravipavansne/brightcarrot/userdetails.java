@@ -6,6 +6,10 @@ public class userdetails {
     private String firstname;
     private String lastname;
     private String address;
+    private String password;
+
+
+
     private String phonenumber;
     private String birthday;
     private String birthmonth;
@@ -28,6 +32,14 @@ public class userdetails {
         this.city = city;
         this.email = email;
         this.flag = flag;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getId() {

@@ -68,8 +68,8 @@ public class LoginActivity extends AppCompatActivity {
                                 databaseReference.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        String flag = dataSnapshot.child("flag").getValue().toString() ;
-                                        if(flag=="true")
+                                        Boolean flag = (Boolean) dataSnapshot.child("flag").getValue();
+                                        if(flag)
                                         {
                                             Intent i = new Intent(LoginActivity.this,Home2Activity.class) ;
                                             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
