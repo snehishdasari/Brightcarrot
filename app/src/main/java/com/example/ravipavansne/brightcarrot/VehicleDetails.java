@@ -7,12 +7,12 @@ public class VehicleDetails {
     String VehicleId ;
     String OwnerId ;
     String Rc1 ;
-    String Rc2 ;
     String Dop ;
     String Numberofkms ;
     String PrevServicedDate ;
     String ColorOfVehicle ;
     String fuelUsed ;
+    String VehicleRating ;
 
     public VehicleDetails(){}
 
@@ -22,19 +22,19 @@ public class VehicleDetails {
         VehicleNo = vehicleNo;
     }
 
-    public VehicleDetails(String vehiclename, String vehicleImage, String vehicleNo, String vehicleId, String ownerId, String rc1, String rc2, String dop, String numberofkms, String prevServicedDate, String colorOfVehicle, String fuelUsed) {
+    public VehicleDetails(String vehiclename, String vehicleImage, String vehicleNo, String vehicleId, String ownerId, String rc1,  String dop, String numberofkms, String prevServicedDate, String colorOfVehicle, String fuelUsed,String VehicleRating) {
         Vehiclename = vehiclename;
         VehicleImage = vehicleImage;
         VehicleNo = vehicleNo;
         VehicleId = vehicleId;
         OwnerId = ownerId;
         Rc1 = rc1;
-        Rc2 = rc2;
         Dop = dop;
         Numberofkms = numberofkms;
         PrevServicedDate = prevServicedDate;
         ColorOfVehicle = colorOfVehicle;
         this.fuelUsed = fuelUsed;
+        this.VehicleRating = VehicleRating ;
     }
 
     public String getVehiclename() {
@@ -85,13 +85,6 @@ public class VehicleDetails {
         Rc1 = rc1;
     }
 
-    public String getRc2() {
-        return Rc2;
-    }
-
-    public void setRc2(String rc2) {
-        Rc2 = rc2;
-    }
 
     public String getDop() {
         return Dop;
