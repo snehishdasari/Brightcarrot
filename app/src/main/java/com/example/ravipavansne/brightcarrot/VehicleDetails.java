@@ -8,6 +8,7 @@ public class VehicleDetails {
     String OwnerId ;
     String Rc1 ;
     String Dop ;
+    String type;
     String Numberofkms ;
     String PrevServicedDate ;
     String ColorOfVehicle ;
@@ -22,7 +23,23 @@ public class VehicleDetails {
         VehicleNo = vehicleNo;
     }
 
-    public VehicleDetails(String vehiclename, String vehicleImage, String vehicleNo, String vehicleId, String ownerId, String rc1,  String dop, String numberofkms, String prevServicedDate, String colorOfVehicle, String fuelUsed,String VehicleRating) {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getVehicleRating() {
+        return VehicleRating;
+    }
+
+    public void setVehicleRating(String vehicleRating) {
+        VehicleRating = vehicleRating;
+    }
+
+    public VehicleDetails(String vehiclename, String vehicleImage, String vehicleNo, String vehicleId, String ownerId, String rc1, String dop, String numberofkms, String prevServicedDate, String colorOfVehicle, String fuelUsed, String VehicleRating) {
         Vehiclename = vehiclename;
         VehicleImage = vehicleImage;
         VehicleNo = vehicleNo;

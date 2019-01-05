@@ -51,6 +51,9 @@ public class VehicleFillingActivity extends AppCompatActivity {
     private ArrayAdapter<String> dayadapter;
     private ArrayAdapter<String> monthadapter;
     private ArrayAdapter<String> yearadapter;
+    private ArrayAdapter<String> dayadapter1;
+    private ArrayAdapter<String> monthadapter1;
+    private ArrayAdapter<String> yearadapter1;
     private ArrayList<String> categories;
     private ArrayList<String> fuels;
     private ArrayAdapter<String> categoryadapter;
@@ -122,13 +125,17 @@ public class VehicleFillingActivity extends AppCompatActivity {
         monthadapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, months);
         yearadapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, years);
 
+        dayadapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, days);
+        monthadapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, months);
+        yearadapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, years);
+
 
         daypsd.setAdapter(dayadapter);
         monthpsd.setAdapter(monthadapter);
         yearpsd.setAdapter(yearadapter);
-        daydop.setAdapter(dayadapter);
-        monthdop.setAdapter(monthadapter);
-        yeardop.setAdapter(yearadapter);
+        daydop.setAdapter(dayadapter1);
+        monthdop.setAdapter(monthadapter1);
+        yeardop.setAdapter(yearadapter1);
 
 
         categories = new ArrayList<>();
@@ -191,11 +198,12 @@ public class VehicleFillingActivity extends AppCompatActivity {
                 String mpsd = monthpsd.getSelectedItem().toString();
                 String ypsd = yearpsd.getSelectedItem().toString();
                 String id = firebaseUser.getUid() ;
-                   DatabaseReference databaseReference1 =  databaseReference.child("Vehicles").push() ;
-                    String vid = "vehiclemine" ;
+                   DatabaseReference databaseReference1 =  databaseReference.child("Users").child(id).child("Vehicles").push() ;
+                    String vid = databaseReference1.getKey() ;
 
                     vehicleDetails = new VehicleDetails(nameov,"s",nov,vid,id,"s",ddop+"/"+mdop+"/"+ydop,kms,dpsd+"/"+mpsd+"/"+ypsd,cov,fu,"5") ;
-                    databaseReference.child("Vehicles").child(vid).setValue(vehicleDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                   vehicleDetails.setType(categ);
+                    databaseReference.child("Users").child(id).child("Vehicles").child(vid).setValue(vehicleDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful())

@@ -64,12 +64,12 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "login successful", Toast.LENGTH_SHORT).show()
                                 ;
                                 String id = firebaseAuth.getCurrentUser().getUid() ;
-                                databaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+                                databaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child(id).child("Account details");
                                 databaseReference.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        Boolean flag = (Boolean) dataSnapshot.child("flag").getValue();
-                                        if(flag)
+                                        String flag =  dataSnapshot.child("flag").getValue().toString();
+                                        if(flag.equals("true"))
                                         {
                                             Intent i = new Intent(LoginActivity.this,Home2Activity.class) ;
                                             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
