@@ -217,7 +217,7 @@ public class SignupActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         String id = firebaseUser.getUid();
-        databaseReference = firebaseDatabase.getReference().child("Users").child(id);
+        databaseReference = firebaseDatabase.getReference().child("Users").child(id).child("Account details");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

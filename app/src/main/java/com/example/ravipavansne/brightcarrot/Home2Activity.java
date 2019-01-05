@@ -45,8 +45,10 @@ public class Home2Activity extends AppCompatActivity
     private FirebaseUser fuser;
     private userdetails u1;
     private String oldpass;
+    String flag;
     private ProgressDialog progressDialog;
     private DatabaseReference databaseReference;
+    private ProgressDialog pd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,13 +58,41 @@ public class Home2Activity extends AppCompatActivity
         getSupportActionBar().setTitle("Home");
         fuser = FirebaseAuth.getInstance().getCurrentUser();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(fuser.getUid()).child("Account details");
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Home2Activity.this,VehicleFillingActivity.class));
             }
-        });
+        });*/
+
+       pd = new ProgressDialog(this);
+       pd.setMessage("Please wait...");
+       pd.setTitle("Checking user details");
+       pd.setCanceledOnTouchOutside(false);
+       pd.show();
+       databaseReference.addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+               flag = dataSnapshot.child("flag").getValue().toString();
+               if(!(flag.equals("true")))
+               {
+                   Intent i = new Intent(getApplicationContext(),SignupActivity.class);
+                   i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                   startActivity(i);
+                   finish();
+               }
+               pd.dismiss();
+           }
+           @Override
+           public void onCancelled(@NonNull DatabaseError databaseError) {
+
+           }
+       });
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -141,7 +171,7 @@ public class Home2Activity extends AppCompatActivity
 
             Button change = (Button) mview.findViewById(R.id.change);
 
-             databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(fuser.getUid());
+             databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(fuser.getUid()).child("Account details");
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
