@@ -99,16 +99,6 @@ public class MyvehiclesActivity extends AppCompatActivity {
         });
 
 
-        recyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int itemPosition = recyclerView.getChildLayoutPosition(v);
-                Intent intent = new Intent(MyvehiclesActivity.this,VehicleDisplayActivity.class) ;
-                intent.putExtra("item",itemPosition) ;
-                startActivity(intent);
-
-                            }
-        });
 
     }
 

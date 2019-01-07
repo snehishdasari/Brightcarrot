@@ -14,8 +14,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class VehicleDisplayActivity extends AppCompatActivity {
 
@@ -29,13 +31,13 @@ public class VehicleDisplayActivity extends AppCompatActivity {
     private ImageView vehimage ;
     private DatabaseReference databaseReference ;
     private FirebaseUser firebaseUser ;
-    private ArrayList<VehicleDetails> list ;
+    private List<VehicleDetails> list ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_display);
         Intent intent = getIntent() ;
-        int itemno = intent.getIntExtra("item",0) ;
+        int i = intent.getIntExtra("item",0) ;
 
         name = (TextView) findViewById(R.id.namevehdisp) ;
         color = (TextView) findViewById(R.id.colorvehdisp) ;
@@ -44,11 +46,13 @@ public class VehicleDisplayActivity extends AppCompatActivity {
         psd = (TextView) findViewById(R.id.psdvehdisp) ;
         fuelused = (TextView) findViewById(R.id.fuelvehdisp) ;
         vehimage = (ImageView) findViewById(R.id.imvehdisp) ;
+        list = new ArrayList<VehicleDetails>() ;
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Vehicle Details") ;
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list.clear();
 
                 for(DataSnapshot d : dataSnapshot.getChildren())
                 {
@@ -63,6 +67,15 @@ public class VehicleDisplayActivity extends AppCompatActivity {
 
             }
         });
+
+        String n = list.get(i).getVehiclename() ;
+        name.setText(n);
+        color.setText(list.get(i).getColorv());
+        kms.setText(list.get(i).getNokms());
+        dop.setText(list.get(i).getDop());
+        psd.setText(list.get(i).getPsd());
+        fuelused.setText(list.get(i).getFuel());
+        Picasso.with(VehicleDisplayActivity.this).load(list.get(i).getVehicleimage()).into(vehimage);
 
 
 
