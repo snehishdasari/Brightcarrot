@@ -25,7 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class VehicleDisplayActivity extends AppCompatActivity {
 
-
+    private TextView head ;
     private TextView name ;
     private TextView color ;
     private TextView kms ;
@@ -55,6 +55,7 @@ public class VehicleDisplayActivity extends AppCompatActivity {
         vehimage = (ImageView) findViewById(R.id.imvehdisp) ;
         edit = (TextView)findViewById(R.id.editvehfill);
         list = new ArrayList<VehicleDetails>() ;
+        head = (TextView) findViewById(R.id.vehicledisplayheading) ;
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +83,7 @@ public class VehicleDisplayActivity extends AppCompatActivity {
                 kms.setText("Kilometers travelled   :   "+list.get(i).getNokms());
                 dop.setText("Date Of Purchase  :  "+list.get(i).getDop());
                 psd.setText("Last Serviced Date   :   "+list.get(i).getPsd());
+                head.setText(list.get(i).getVehicleno());
                 fuelused.setText("Fuel Used   :   "+list.get(i).getFuel());
                 Picasso.with(VehicleDisplayActivity.this).load(list.get(i).getVehicleimage()).into(vehimage);
             }
