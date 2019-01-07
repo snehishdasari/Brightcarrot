@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/gradient"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".VehicleDisplayActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1.9"
             android:layout_margin="10dp"
             android:background="@drawable/roundbuttonyellow"
             >
@@ -64,25 +63,33 @@
         </RelativeLayout>
 
         <ImageView
+            android:id="@+id/imvehdisp"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.3"
             android:src="@drawable/background"/>
 
         <TextView
+            android:id="@+id/namevehdisp"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
             android:textSize="26sp"
             android:text="honda activa 4g 110cc"
             android:textStyle="bold"
+            android:textColor="#ffffff"
             android:textAllCaps="true"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             />
 
         <TextView
+            android:id="@+id/colorvehdisp"
+            android:layout_weight="2"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:textSize="23sp"
+            android:textColor="#ffffff"
             android:textAllCaps="true"
             android:paddingTop="10dp"
             android:paddingLeft="10dp"
@@ -90,37 +97,57 @@
             android:fontFamily="@font/acme"/>
 
         <TextView
+            android:id="@+id/fuelvehdisp"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
             android:textSize="23sp"
             android:textAllCaps="true"
             android:paddingTop="10dp"
             android:paddingLeft="10dp"
-            android:text="Color    :      Red "
+            android:textColor="#ffffff"
+            android:text="Fuel Used    :      Petrol"
             android:fontFamily="@font/acme"/>
 
         <TextView
+            android:id="@+id/dopvehdisp"
+            android:layout_weight="2"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:textSize="23sp"
+            android:textColor="#ffffff"
             android:textAllCaps="true"
             android:paddingTop="10dp"
             android:paddingLeft="10dp"
-            android:text="Color    :      Red "
+            android:text="Date Of Purchase    :      21/08/99 "
             android:fontFamily="@font/acme"/>
 
         <TextView
+            android:id="@+id/kmsvehdisp"
+            android:layout_weight="2"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:textSize="23sp"
+            android:textColor="#ffffff"
             android:textAllCaps="true"
             android:paddingTop="10dp"
             android:paddingLeft="10dp"
-            android:text="Color    :      Red "
+            android:text="Number of KMS    :     15000 "
             android:fontFamily="@font/acme"/>
 
 
-
+        <TextView
+            android:id="@+id/psdvehdisp"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="22sp"
+            android:textColor="#ffffff"
+            android:textAllCaps="true"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:text="Previously Serviced Date    :      22/08/99 "
+            android:fontFamily="@font/acme"/>
 
 
 
@@ -143,7 +170,3 @@
 
 
     </LinearLayout>
-
-
-
-</ScrollView>

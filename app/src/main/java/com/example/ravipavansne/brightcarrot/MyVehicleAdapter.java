@@ -17,6 +17,12 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.Myve
 
     private Context context;
     private List<VehicleDetails> list;
+    private final View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    } ;
 
     public MyVehicleAdapter (Context context , List<VehicleDetails> list)
     {
@@ -27,9 +33,12 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.Myve
     @Override
     public MyVehicleAdapter.MyvehicleViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(context).inflate(R.layout.myvehiclecard,null);
+        v.setOnClickListener(onClickListener);
         MyvehicleViewHolder myvehicleViewHolder = new MyvehicleViewHolder(v);
         return myvehicleViewHolder;
     }
+
+
 
     @Override
     public void onBindViewHolder(@NonNull MyVehicleAdapter.MyvehicleViewHolder myvehicleViewHolder, int i) {
