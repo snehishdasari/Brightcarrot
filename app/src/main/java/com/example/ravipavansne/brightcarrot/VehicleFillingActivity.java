@@ -1,5 +1,6 @@
 package com.example.ravipavansne.brightcarrot;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.ContactsContract;
@@ -31,6 +32,8 @@ import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class VehicleFillingActivity extends AppCompatActivity {
 
@@ -71,7 +74,9 @@ public class VehicleFillingActivity extends AppCompatActivity {
     private VehicleDetails vehicleDetails ;
     private String imgveh ;
     private String imgrc ;
-
+    private ProgressDialog pd;
+    private int flag;
+    private CircleImageView back;
 
 
     @Override
@@ -98,6 +103,13 @@ public class VehicleFillingActivity extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
+        back = (CircleImageView)findViewById(R.id.backvehiclefilling);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),MyvehiclesActivity.class));
+            }
+        });
         days = new ArrayList<>();
         for (int i = 1; i < 32; i++) {
             String k = String.valueOf(i);
@@ -164,6 +176,47 @@ public class VehicleFillingActivity extends AppCompatActivity {
         category.setAdapter(categoryadapter);
         FuelUsed.setAdapter(fueladapter);
 
+        Intent intent = getIntent();
+         flag = intent.getIntExtra("item",-1);
+        if(flag!=-1)
+        {
+            pd = new ProgressDialog(getApplicationContext());
+            pd.setTitle("Adding vehicle details ");
+            pd.setMessage("Please wait");
+            pd.setCanceledOnTouchOutside(false);
+            DatabaseReference databaseReference2 =  databaseReference.child("Users").child(firebaseUser.getUid()).child("Vehicle Details").child(VehicleDisplayActivity.list.get(flag).getVehicleid());
+            databaseReference2.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    nametil.getEditText().setText(dataSnapshot.child("vehiclename").getValue().toString());
+                    notil.getEditText().setText(dataSnapshot.child("vehicleno").getValue().toString());
+                    coltil.getEditText().setText(dataSnapshot.child("colorv").getValue().toString());
+                    kmstil.getEditText().setText(dataSnapshot.child("vehiclename").getValue().toString());
+                    category.setSelection(categoryadapter.getPosition(dataSnapshot.child("type").getValue().toString()));
+                    FuelUsed.setSelection(fueladapter.getPosition(dataSnapshot.child("fuel").getValue().toString()));
+                    String dop[] = (dataSnapshot.child("dop").getValue().toString()).split("/");
+                    monthdop.setSelection(monthadapter1.getPosition(dop[1]));
+                    yeardop.setSelection(yearadapter1.getPosition(dop[2]));
+                    daydop.setSelection(dayadapter1.getPosition(dop[0]));
+                    String psd[] = (dataSnapshot.child("psd").getValue().toString()).split("/");
+                    monthpsd.setSelection(monthadapter.getPosition(psd[1]));
+                    daypsd.setSelection(dayadapter.getPosition(psd[0]));
+                    yearpsd.setSelection(yearadapter.getPosition(psd[2]));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+        else{
+            pd = new ProgressDialog(getApplicationContext());
+            pd.setTitle("Editing vehicle details ");
+            pd.setMessage("Please wait");
+            pd.setCanceledOnTouchOutside(false);
+        }
         vehimagbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,6 +243,8 @@ public class VehicleFillingActivity extends AppCompatActivity {
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                pd.show();
                 String nameov = nametil.getEditText().getText().toString();
                 String nov = notil.getEditText().getText().toString();
                 String cov = coltil.getEditText().getText().toString();
@@ -203,8 +258,14 @@ public class VehicleFillingActivity extends AppCompatActivity {
                 String mpsd = monthpsd.getSelectedItem().toString();
                 String ypsd = yearpsd.getSelectedItem().toString();
                 String id = firebaseUser.getUid() ;
+                    String vid = "";
+                    if(flag==-1){
                    DatabaseReference databaseReference1 =  databaseReference.child("Users").child(id).child("Vehicle Details").push() ;
-                    String vid = databaseReference1.getKey() ;
+                     vid = databaseReference1.getKey() ;}
+                     else{
+                        vid = VehicleDisplayActivity.list.get(flag).getVehicleid();
+                    }
+
 
                     vehicleDetails = new VehicleDetails(nameov,imgveh,nov,vid,id,imgrc,ddop+"/"+mdop+"/"+ydop,categ,kms,dpsd+"/"+mpsd+"/"+ypsd,cov,fu,"5") ;
 
@@ -213,10 +274,18 @@ public class VehicleFillingActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful())
                             {
-                                Toast.makeText(VehicleFillingActivity.this,"Successful",Toast.LENGTH_LONG).show() ;
+
+                                Toast.makeText(VehicleFillingActivity.this,"Save Successful",Toast.LENGTH_LONG).show() ;
+                                Intent i = new Intent(getApplicationContext(),MyvehiclesActivity.class);
+                                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(i);
+                                finish();
+                                pd.dismiss();
+
                             }
                             else
                             {
+                                pd.hide();
                                 Toast.makeText(VehicleFillingActivity.this," not Successful",Toast.LENGTH_LONG).show() ;
                             }
                         }

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +32,7 @@ public class MyvehiclesActivity extends AppCompatActivity {
     private List<VehicleDetails> arrayList;
     private ProgressDialog progressDialog ;
     private MyVehicleAdapter myVehicleAdapter;
+    private ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,13 @@ public class MyvehiclesActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
         arrayList = new ArrayList<VehicleDetails>();
+        back = (ImageView)findViewById(R.id.myvehback);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),Home2Activity.class));
+            }
+        });
        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Vehicle Details");
 
 
@@ -67,10 +76,11 @@ public class MyvehiclesActivity extends AppCompatActivity {
                progressDialog.dismiss();
                 TextView tv = (TextView)findViewById(R.id.myvehno);
                 if(arrayList.size()==0)
-                    tv.setText("ADD VEHICLES ");
+                    tv.setText("PLEASE ADD VEHICLES ");
                 else
                 {myVehicleAdapter = new MyVehicleAdapter(getApplicationContext(),arrayList);
-                recyclerView.setAdapter(myVehicleAdapter);}
+                recyclerView.setAdapter(myVehicleAdapter);
+                tv.setText(" ");}
 
 
 

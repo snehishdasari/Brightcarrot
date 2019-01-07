@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +21,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class VehicleDisplayActivity extends AppCompatActivity {
 
 
@@ -28,17 +32,20 @@ public class VehicleDisplayActivity extends AppCompatActivity {
     private TextView dop ;
     private TextView psd ;
     private TextView fuelused ;
+    private TextView edit;
     private ImageView vehimage ;
     private DatabaseReference databaseReference ;
     private FirebaseUser firebaseUser ;
-    private List<VehicleDetails> list ;
+    public static List<VehicleDetails> list ;
+    private CircleImageView b;
+    private int i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_display);
         Intent intent = getIntent() ;
-        int i = intent.getIntExtra("item",0) ;
-
+         i = intent.getIntExtra("item",0) ;
+         b=(CircleImageView)findViewById(R.id.backvehicledisplay);
         name = (TextView) findViewById(R.id.namevehdisp) ;
         color = (TextView) findViewById(R.id.colorvehdisp) ;
         kms = (TextView) findViewById(R.id.kmsvehdisp) ;
@@ -46,7 +53,17 @@ public class VehicleDisplayActivity extends AppCompatActivity {
         psd = (TextView) findViewById(R.id.psdvehdisp) ;
         fuelused = (TextView) findViewById(R.id.fuelvehdisp) ;
         vehimage = (ImageView) findViewById(R.id.imvehdisp) ;
+        edit = (TextView)findViewById(R.id.editvehfill);
         list = new ArrayList<VehicleDetails>() ;
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),MyvehiclesActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+                finish();
+            }
+        });
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Vehicle Details") ;
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -59,7 +76,14 @@ public class VehicleDisplayActivity extends AppCompatActivity {
                     VehicleDetails v = d.getValue(VehicleDetails.class) ;
                     list.add(v) ;
                 }
-
+                String n = list.get(i).getVehiclename() ;
+                name.setText("Name   :   "+n);
+                color.setText("Colour   :   "+list.get(i).getColorv());
+                kms.setText("Kilometers travelled   :   "+list.get(i).getNokms());
+                dop.setText("Date Of Purchase  :  "+list.get(i).getDop());
+                psd.setText("Last Serviced Date   :   "+list.get(i).getPsd());
+                fuelused.setText("Fuel Used   :   "+list.get(i).getFuel());
+                Picasso.with(VehicleDisplayActivity.this).load(list.get(i).getVehicleimage()).into(vehimage);
             }
 
             @Override
@@ -68,14 +92,17 @@ public class VehicleDisplayActivity extends AppCompatActivity {
             }
         });
 
-        String n = list.get(i).getVehiclename() ;
-        name.setText(n);
-        color.setText(list.get(i).getColorv());
-        kms.setText(list.get(i).getNokms());
-        dop.setText(list.get(i).getDop());
-        psd.setText(list.get(i).getPsd());
-        fuelused.setText(list.get(i).getFuel());
-        Picasso.with(VehicleDisplayActivity.this).load(list.get(i).getVehicleimage()).into(vehimage);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),VehicleFillingActivity.class) ;
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("item",i) ;
+                startActivity(intent);
+            }
+        });
+
+
 
 
 

@@ -55,6 +55,7 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.Myve
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context,VehicleDisplayActivity.class) ;
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("item",k) ;
                 context.startActivity(intent);
             }
