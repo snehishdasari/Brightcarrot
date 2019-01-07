@@ -190,6 +190,7 @@ public class VehicleFillingActivity extends AppCompatActivity {
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int x = 0;
                 String nameov = nametil.getEditText().getText().toString();
                 String nov = notil.getEditText().getText().toString();
                 String cov = coltil.getEditText().getText().toString();
