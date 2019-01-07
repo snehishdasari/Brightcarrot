@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VehicleDisplayActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/roundbuttonyellow"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:id="@+id/backvehicledisplay"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" TS08FN4860"
+                               android:fontFamily="@font/acme"
+                android:id="@+id/vehicledisplayheading"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/backvehicledisplay"
+                android:background="@drawable/roundbuttonyellow"
+                android:textColor="#000000"
+
+                android:textSize="25sp"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EDIT"
+                android:fontFamily="@font/acme"
+                android:id="@+id/savevehfill"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:layout_centerVertical="true"
+                android:textAlignment="textEnd"
+                android:layout_marginRight="15dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/vehiclefillingheading"/>
+
+
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/background"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="26sp"
+            android:text="honda activa 4g 110cc"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="23sp"
+            android:textAllCaps="true"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:text="Color    :      Red "
+            android:fontFamily="@font/acme"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="23sp"
+            android:textAllCaps="true"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:text="Color    :      Red "
+            android:fontFamily="@font/acme"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="23sp"
+            android:textAllCaps="true"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:text="Color    :      Red "
+            android:fontFamily="@font/acme"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="23sp"
+            android:textAllCaps="true"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:text="Color    :      Red "
+            android:fontFamily="@font/acme"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+</ScrollView>

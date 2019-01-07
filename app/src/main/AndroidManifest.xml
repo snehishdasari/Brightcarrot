@@ -35,7 +35,8 @@
             android:name=".Home2Activity"
             android:label="@string/title_activity_home2"
             android:theme="@style/AppTheme" />
-        <activity android:name=".VehicleFillingActivity"></activity>
+        <activity android:name=".VehicleFillingActivity" />
+        <activity android:name=".VehicleDisplayActivity"></activity>
     </application>
 
 </manifest>
