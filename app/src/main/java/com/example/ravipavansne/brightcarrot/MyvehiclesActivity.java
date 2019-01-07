@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyvehiclesActivity extends AppCompatActivity {
 
@@ -27,7 +28,9 @@ public class MyvehiclesActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private DatabaseReference databaseReference;
     private FirebaseUser firebaseUser;
-    private ArrayList<VehicleDetails> arrayList;
+    private List<VehicleDetails> arrayList;
+    private ProgressDialog progressDialog ;
+    private MyVehicleAdapter myVehicleAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,18 +38,21 @@ public class MyvehiclesActivity extends AppCompatActivity {
 
     recyclerView = (RecyclerView)findViewById(R.id.vehiclesrecycler);
     recyclerView.setHasFixedSize(true);
-    recyclerView.setLayoutManager(new LinearLayoutManager(MyvehiclesActivity.this));
+
+    recyclerView.setLayoutManager(new LinearLayoutManager(this));
     firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
-        final ProgressDialog progressDialog = new ProgressDialog(this);
+       progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Searching your vehicles");
         progressDialog.setMessage("Please Wait");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
         arrayList = new ArrayList<VehicleDetails>();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("vehicles");
-        databaseReference.addValueEventListener(new ValueEventListener() {
+       DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Vehicle Details");
+
+
+            databaseReference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -56,12 +62,15 @@ public class MyvehiclesActivity extends AppCompatActivity {
 
                 VehicleDetails v = d.getValue(VehicleDetails.class);
                 arrayList.add(v);
-                }
+            }
 
+               progressDialog.dismiss();
                 TextView tv = (TextView)findViewById(R.id.myvehno);
                 if(arrayList.size()==0)
-                    tv.setText("NO VEHICLES ADDED");
-                progressDialog.dismiss();
+                    tv.setText("ADD VEHICLES ");
+                else
+                {myVehicleAdapter = new MyVehicleAdapter(getApplicationContext(),arrayList);
+                recyclerView.setAdapter(myVehicleAdapter);}
 
 
 
@@ -76,8 +85,10 @@ public class MyvehiclesActivity extends AppCompatActivity {
 
 
 
-    MyVehicleAdapter myVehicleAdapter = new MyVehicleAdapter(this,arrayList);
-    recyclerView.setAdapter(myVehicleAdapter);
+
+
+
+
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

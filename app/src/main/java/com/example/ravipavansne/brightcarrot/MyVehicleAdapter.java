@@ -9,15 +9,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.MyvehicleViewHolder> {
 
     private Context context;
-    private ArrayList<VehicleDetails> list;
+    private List<VehicleDetails> list;
 
-    public MyVehicleAdapter (Context context , ArrayList<VehicleDetails> list)
+    public MyVehicleAdapter (Context context , List<VehicleDetails> list)
     {
         this.context = context;
         this.list = list;
@@ -37,7 +38,7 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.Myve
         myvehicleViewHolder.circleImageView.setImageResource(R.drawable.background);
         myvehicleViewHolder.name.setText(vehicleDetails.getVehiclename());
         myvehicleViewHolder.type.setText(vehicleDetails.getType());
-        myvehicleViewHolder.number.setText(vehicleDetails.getVehicleNo());
+        myvehicleViewHolder.number.setText(vehicleDetails.getVehicleno());
         myvehicleViewHolder.rating.setText("5/5");
 
     }

@@ -1,26 +1,96 @@
 package com.example.ravipavansne.brightcarrot;
 
 public class VehicleDetails {
-    String Vehiclename ;
-    String VehicleImage ;
-    String VehicleNo ;
-    String VehicleId ;
-    String OwnerId ;
-    String Rc1 ;
-    String Dop ;
-    String type;
-    String Numberofkms ;
-    String PrevServicedDate ;
-    String ColorOfVehicle ;
-    String fuelUsed ;
-    String VehicleRating ;
+
+
+    public String vehiclename ;
+    public String vehicleimage;
+    public String vehicleno ;
+    public String vehicleid ;
+    public String ownerid ;
+    public String rc ;
+    public String dop ;
+    public String type ;
+    public String nokms ;
+    public String psd ;
+    public String colorv ;
+    public String fuel ;
+    public String rating ;
 
     public VehicleDetails(){}
 
-    public VehicleDetails(String vehiclename, String vehicleImage, String vehicleNo) {
-        Vehiclename = vehiclename;
-        VehicleImage = vehicleImage;
-        VehicleNo = vehicleNo;
+
+    public VehicleDetails(String vehiclename, String vehicleimage, String vehicleno, String vehicleid, String ownerid, String rc, String dop, String type, String nokms, String psd, String colorv, String fuel, String rating) {
+        this.vehiclename = vehiclename;
+        this.vehicleimage = vehicleimage;
+        this.vehicleno = vehicleno;
+        this.vehicleid = vehicleid;
+        this.ownerid = ownerid;
+        this.rc = rc;
+        this.dop = dop;
+        this.type = type;
+        this.nokms = nokms;
+        this.psd = psd;
+        this.colorv = colorv;
+        this.fuel = fuel;
+        this.rating = rating;
+    }
+
+
+    public String getVehiclename() {
+        return vehiclename;
+    }
+
+    public void setVehiclename(String vehiclename) {
+        this.vehiclename = vehiclename;
+    }
+
+    public String getVehicleimage() {
+        return vehicleimage;
+    }
+
+    public void setVehicleimage(String vehicleimage) {
+        this.vehicleimage = vehicleimage;
+    }
+
+    public String getVehicleno() {
+        return vehicleno;
+    }
+
+    public void setVehicleno(String vehicleno) {
+        this.vehicleno = vehicleno;
+    }
+
+    public String getVehicleid() {
+        return vehicleid;
+    }
+
+    public void setVehicleid(String vehicleid) {
+        this.vehicleid = vehicleid;
+    }
+
+    public String getOwnerid() {
+        return ownerid;
+    }
+
+    public void setOwnerid(String ownerid) {
+        this.ownerid = ownerid;
+    }
+
+    public String getRc() {
+        return rc;
+    }
+
+    public void setRc(String rc) {
+        this.rc = rc;
+    }
+
+    public String getDop() {
+        return dop;
+    }
+
+    public void setDop(String dop) {
+        this.dop = dop;
     }
 
     public String getType() {
@@ -31,115 +101,43 @@ public class VehicleDetails {
         this.type = type;
     }
 
-    public String getVehicleRating() {
-        return VehicleRating;
+    public String getNokms() {
+        return nokms;
     }
 
-    public void setVehicleRating(String vehicleRating) {
-        VehicleRating = vehicleRating;
+    public void setNokms(String nokms) {
+        this.nokms = nokms;
     }
 
-    public VehicleDetails(String vehiclename, String vehicleImage, String vehicleNo, String vehicleId, String ownerId, String rc1, String dop, String numberofkms, String prevServicedDate, String colorOfVehicle, String fuelUsed, String VehicleRating) {
-        Vehiclename = vehiclename;
-        VehicleImage = vehicleImage;
-        VehicleNo = vehicleNo;
-        VehicleId = vehicleId;
-        OwnerId = ownerId;
-        Rc1 = rc1;
-        Dop = dop;
-        Numberofkms = numberofkms;
-        PrevServicedDate = prevServicedDate;
-        ColorOfVehicle = colorOfVehicle;
-        this.fuelUsed = fuelUsed;
-        this.VehicleRating = VehicleRating ;
+    public String getPsd() {
+        return psd;
     }
 
-    public String getVehiclename() {
-        return Vehiclename;
+    public void setPsd(String psd) {
+        this.psd = psd;
     }
 
-    public void setVehiclename(String vehiclename) {
-        Vehiclename = vehiclename;
+    public String getColorv() {
+        return colorv;
     }
 
-    public String getVehicleImage() {
-        return VehicleImage;
+    public void setColorv(String colorv) {
+        this.colorv = colorv;
     }
 
-    public void setVehicleImage(String vehicleImage) {
-        VehicleImage = vehicleImage;
+    public String getFuel() {
+        return fuel;
     }
 
-    public String getVehicleNo() {
-        return VehicleNo;
+    public void setFuel(String fuel) {
+        this.fuel = fuel;
     }
 
-    public void setVehicleNo(String vehicleNo) {
-        VehicleNo = vehicleNo;
+    public String getRating() {
+        return rating;
     }
 
-    public String getVehicleId() {
-        return VehicleId;
-    }
-
-    public void setVehicleId(String vehicleId) {
-        VehicleId = vehicleId;
-    }
-
-    public String getOwnerId() {
-        return OwnerId;
-    }
-
-    public void setOwnerId(String ownerId) {
-        OwnerId = ownerId;
-    }
-
-    public String getRc1() {
-        return Rc1;
-    }
-
-    public void setRc1(String rc1) {
-        Rc1 = rc1;
-    }
-
-
-    public String getDop() {
-        return Dop;
-    }
-
-    public void setDop(String dop) {
-        Dop = dop;
-    }
-
-    public String getNumberofkms() {
-        return Numberofkms;
-    }
-
-    public void setNumberofkms(String numberofkms) {
-        Numberofkms = numberofkms;
-    }
-
-    public String getPrevServicedDate() {
-        return PrevServicedDate;
-    }
-
-    public void setPrevServicedDate(String prevServicedDate) {
-        PrevServicedDate = prevServicedDate;
-    }
-
-    public String getColorOfVehicle() {
-        return ColorOfVehicle;
-    }
-
-    public void setColorOfVehicle(String colorOfVehicle) {
-        ColorOfVehicle = colorOfVehicle;
-    }
-
-    public String getFuelUsed() {
-        return fuelUsed;
-    }
-
-    public void setFuelUsed(String fuelUsed) {
-        this.fuelUsed = fuelUsed;
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 }

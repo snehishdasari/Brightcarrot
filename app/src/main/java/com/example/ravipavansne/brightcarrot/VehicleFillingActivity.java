@@ -20,8 +20,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -66,6 +69,8 @@ public class VehicleFillingActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseUser firebaseUser ;
     private VehicleDetails vehicleDetails ;
+    private String imgveh ;
+    private String imgrc ;
 
 
 
@@ -115,7 +120,7 @@ public class VehicleFillingActivity extends AppCompatActivity {
 
 
         years = new ArrayList<>();
-        for (int i = 2000; i > 1949; i--) {
+        for (int i = 2019; i > 1949; i--) {
             String k = String.valueOf(i);
             years.add(k);
         }
@@ -198,17 +203,21 @@ public class VehicleFillingActivity extends AppCompatActivity {
                 String mpsd = monthpsd.getSelectedItem().toString();
                 String ypsd = yearpsd.getSelectedItem().toString();
                 String id = firebaseUser.getUid() ;
-                   DatabaseReference databaseReference1 =  databaseReference.child("Users").child(id).child("Vehicles").push() ;
+                   DatabaseReference databaseReference1 =  databaseReference.child("Users").child(id).child("Vehicle Details").push() ;
                     String vid = databaseReference1.getKey() ;
 
-                    vehicleDetails = new VehicleDetails(nameov,"s",nov,vid,id,"s",ddop+"/"+mdop+"/"+ydop,kms,dpsd+"/"+mpsd+"/"+ypsd,cov,fu,"5") ;
-                   vehicleDetails.setType(categ);
-                    databaseReference.child("Users").child(id).child("Vehicles").child(vid).setValue(vehicleDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    vehicleDetails = new VehicleDetails(nameov,imgveh,nov,vid,id,imgrc,ddop+"/"+mdop+"/"+ydop,categ,kms,dpsd+"/"+mpsd+"/"+ypsd,cov,fu,"5") ;
+
+                    databaseReference.child("Users").child(id).child("Vehicle Details").child(vid).setValue(vehicleDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful())
                             {
                                 Toast.makeText(VehicleFillingActivity.this,"Successful",Toast.LENGTH_LONG).show() ;
+                            }
+                            else
+                            {
+                                Toast.makeText(VehicleFillingActivity.this," not Successful",Toast.LENGTH_LONG).show() ;
                             }
                         }
                     });
@@ -260,6 +269,7 @@ public class VehicleFillingActivity extends AppCompatActivity {
 
 
                 String id = firebaseUser.getUid();
+
                 StorageReference filePath = vehicleImage.child("Vehicle_images").child(id + "v.jpg");
                 filePath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -269,6 +279,12 @@ public class VehicleFillingActivity extends AppCompatActivity {
                     }
                 });
 
+                filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        imgveh = uri.toString() ;
+                    }
+                });
 
             }
 
@@ -278,15 +294,20 @@ public class VehicleFillingActivity extends AppCompatActivity {
 
 
             String id = firebaseUser.getUid();
-            StorageReference filePath = vehicleImage.child("RCimages").child(id + "rc.jpg");
-            filePath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            StorageReference filePath1 = vehicleImage.child("RCimages").child(id + "rc.jpg");
+            filePath1.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(VehicleFillingActivity.this,"Success",Toast.LENGTH_LONG).show();
 
                 }
             });
-
+            filePath1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    imgrc = uri.toString() ;
+                }
+            });
 
         }
 

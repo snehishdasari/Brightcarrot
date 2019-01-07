@@ -51,7 +51,7 @@ public class MyaccountActivity extends AppCompatActivity {
     address= (TextView) findViewById(R.id.addrssid) ;
     edit = (Button) findViewById(R.id.edit ) ;
     firebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-    databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()) ;
+    databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Account details") ;
     databaseReference.addValueEventListener(new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
