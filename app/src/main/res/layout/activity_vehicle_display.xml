@@ -65,8 +65,11 @@
             android:id="@+id/imvehdisp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1.3"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1.25"
             android:src="@drawable/background"/>
 
         <LinearLayout
@@ -80,12 +83,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:textSize="18sp"
-            android:layout_margin="10dp"
+            android:textSize="20sp"
+            android:padding="5dp"
+            android:gravity="center"
+            android:layout_margin="5dp"
             android:fontFamily="@font/acme"
             android:text="honda activa 4g 110cc"
             android:textStyle="bold"
-            android:textColor="#ffffff"
+            android:background="@drawable/border"
+            android:textColor="@color/colorAccent"
 
             android:textAllCaps="true"
 
@@ -97,6 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="16sp"
+            android:gravity="center"
             android:layout_margin="10dp"
             android:textColor="#ffffff"
             android:textAllCaps="true"
@@ -109,6 +116,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:layout_margin="10dp"
+            android:gravity="center"
             android:textSize="16sp"
             android:textAllCaps="true"
             android:textColor="#ffffff"
@@ -121,6 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="16sp"
+            android:gravity="center"
             android:textColor="#ffffff"
             android:textAllCaps="true"
             android:layout_margin="10dp"
@@ -135,6 +144,7 @@
             android:textSize="16sp"
             android:textColor="#ffffff"
             android:textAllCaps="true"
+            android:gravity="center"
             android:layout_margin="10dp"
             android:text="Number of KMS    :     15000 "
             android:fontFamily="@font/acme"/>
@@ -148,6 +158,7 @@
             android:textSize="16sp"
             android:textColor="#ffffff"
             android:textAllCaps="true"
+            android:gravity="center"
             android:layout_margin="10dp"
             android:text="Previously Serviced Date    :      22/08/99 "
             android:fontFamily="@font/acme"/>

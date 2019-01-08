@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.ArrayList;
@@ -49,8 +51,8 @@ public class VehicleFillingActivity extends AppCompatActivity {
     private Spinner monthpsd;
     private Spinner yearpsd;
     private Spinner daypsd;
-    private Button vehimagbtn;
-    private Button rcimagbtn;
+    private ImageView vehimagbtn;
+    private ImageView rcimagbtn;
     private ArrayList<String> months;
     private ArrayList<String> days;
     private ArrayList<String> years;
@@ -77,7 +79,8 @@ public class VehicleFillingActivity extends AppCompatActivity {
     private ProgressDialog pd;
     private int flag;
     private CircleImageView back;
-
+    private String vid;
+    private boolean switchimage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +90,8 @@ public class VehicleFillingActivity extends AppCompatActivity {
         notil = (TextInputLayout) findViewById(R.id.novehfill);
         coltil = (TextInputLayout) findViewById(R.id.colvehfill);
         kmstil = (TextInputLayout) findViewById(R.id.kmsvehfill);
-        vehimagbtn = (Button) findViewById(R.id.vehimages);
-        rcimagbtn = (Button) findViewById(R.id.rcimages);
+        vehimagbtn = (ImageView) findViewById(R.id.vehimages);
+        rcimagbtn = (ImageView) findViewById(R.id.rcimages);
         category = (Spinner) findViewById(R.id.spinnercategory);
         FuelUsed = (Spinner) findViewById(R.id.spinnerfuel);
         monthdop = (Spinner) findViewById(R.id.spinnermonthdop);
@@ -203,6 +206,12 @@ public class VehicleFillingActivity extends AppCompatActivity {
                     monthpsd.setSelection(monthadapter.getPosition(psd[1]));
                     daypsd.setSelection(dayadapter.getPosition(psd[0]));
                     yearpsd.setSelection(yearadapter.getPosition(psd[2]));
+                    String a = VehicleDisplayActivity.list.get(flag).getVehicleimage();
+                    String b = VehicleDisplayActivity.list.get(flag).getRc();
+                    Picasso.with(VehicleFillingActivity.this).load(a).into(vehimagbtn);
+                    Picasso.with(VehicleFillingActivity.this).load(b).into(rcimagbtn);
+                    imgveh = a;
+                    imgrc = b;
                 }
 
                 @Override
@@ -224,6 +233,7 @@ public class VehicleFillingActivity extends AppCompatActivity {
                 galleryIntent.setType("image/*");
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"), GALLERY_PICK);
+                switchimage = true;
             }
         });
 
@@ -235,9 +245,19 @@ public class VehicleFillingActivity extends AppCompatActivity {
                 galleryIntent.setType("image/*");
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"), GALLERY_PICK1);
+                switchimage = false;
 
             }
         });
+
+
+         vid = "";
+        if(flag==-1){
+            DatabaseReference databaseReference1 =  databaseReference.child("Users").child(firebaseUser.getUid()).child("Vehicle Details").push() ;
+            vid = databaseReference1.getKey() ;}
+        else{
+            vid = VehicleDisplayActivity.list.get(flag).getVehicleid();
+        }
 
 
         savebtn.setOnClickListener(new View.OnClickListener() {
@@ -258,13 +278,6 @@ public class VehicleFillingActivity extends AppCompatActivity {
                 String mpsd = monthpsd.getSelectedItem().toString();
                 String ypsd = yearpsd.getSelectedItem().toString();
                 String id = firebaseUser.getUid() ;
-                    String vid = "";
-                    if(flag==-1){
-                   DatabaseReference databaseReference1 =  databaseReference.child("Users").child(id).child("Vehicle Details").push() ;
-                     vid = databaseReference1.getKey() ;}
-                     else{
-                        vid = VehicleDisplayActivity.list.get(flag).getVehicleid();
-                    }
 
 
                     vehicleDetails = new VehicleDetails(nameov,imgveh,nov,vid,id,imgrc,ddop+"/"+mdop+"/"+ydop,categ,kms,dpsd+"/"+mpsd+"/"+ypsd,cov,fu,"5") ;
@@ -334,16 +347,20 @@ public class VehicleFillingActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == GALLERY_PICK && resultCode == RESULT_OK) {
-            Uri imageUri = data.getData();
+            final Uri imageUri = data.getData();
 
 
+
+                if(switchimage){
                 String id = firebaseUser.getUid();
 
-                StorageReference filePath = vehicleImage.child("Vehicle_images").child(id + "v.jpg");
+                StorageReference filePath = vehicleImage.child("Vehicle_images").child(id).child(vid + "vehicleimage.jpg");
                 filePath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(VehicleFillingActivity.this,"Success",Toast.LENGTH_LONG).show();
+
+                        Picasso.with(VehicleFillingActivity.this).load(imageUri.toString()).into(vehimagbtn);
+                        Toast.makeText(VehicleFillingActivity.this,"Success veh",Toast.LENGTH_LONG).show();
 
                     }
                 });
@@ -355,33 +372,33 @@ public class VehicleFillingActivity extends AppCompatActivity {
                     }
                 });
 
+                   // Picasso.with(VehicleFillingActivity.this).load(imgveh).into(vehimagbtn);
+
+                }
+                else{
+
+                    String id = firebaseUser.getUid();
+                    StorageReference filePath1 = vehicleImage.child("RCimages").child(id).child(vid + "rcimage.jpg");
+                    filePath1.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            Picasso.with(VehicleFillingActivity.this).load(imageUri.toString()).into(rcimagbtn);
+                            Toast.makeText(VehicleFillingActivity.this,"Success rc",Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+
+                    filePath1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            imgrc = uri.toString() ;
+                        }
+                    });
+                    Picasso.with(VehicleFillingActivity.this).load(imgrc).into(rcimagbtn);
+                }
+
             }
-
-
-        if (requestCode == GALLERY_PICK1 && resultCode == RESULT_OK) {
-            Uri imageUri = data.getData();
-
-
-            String id = firebaseUser.getUid();
-            StorageReference filePath1 = vehicleImage.child("RCimages").child(id + "rc.jpg");
-            filePath1.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(VehicleFillingActivity.this,"Success",Toast.LENGTH_LONG).show();
-
-                }
-            });
-            filePath1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    imgrc = uri.toString() ;
-                }
-            });
-
-        }
-
-
-
 
         }
 
