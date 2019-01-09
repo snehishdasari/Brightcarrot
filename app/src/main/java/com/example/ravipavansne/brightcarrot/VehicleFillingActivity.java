@@ -185,7 +185,7 @@ public class VehicleFillingActivity extends AppCompatActivity {
         if(flag!=-1)
         {
             pd = new ProgressDialog(getApplicationContext());
-            pd.setTitle("Adding vehicle details ");
+            pd.setTitle("Editing vehicle details ");
             pd.setMessage("Please wait");
             pd.setCanceledOnTouchOutside(false);
             DatabaseReference databaseReference2 =  databaseReference.child("Users").child(firebaseUser.getUid()).child("Vehicle Details").child(VehicleDisplayActivity.list.get(flag).getVehicleid());
@@ -223,7 +223,7 @@ public class VehicleFillingActivity extends AppCompatActivity {
         }
         else{
             pd = new ProgressDialog(getApplicationContext());
-            pd.setTitle("Editing vehicle details ");
+            pd.setTitle("Adding vehicle details ");
             pd.setMessage("Please wait");
             pd.setCanceledOnTouchOutside(false);
         }
@@ -265,7 +265,7 @@ public class VehicleFillingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                pd.show();
+                //pd.show();
                 String nameov = nametil.getEditText().getText().toString();
                 String nov = notil.getEditText().getText().toString();
                 String cov = coltil.getEditText().getText().toString();
@@ -294,12 +294,12 @@ public class VehicleFillingActivity extends AppCompatActivity {
                                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(i);
                                 finish();
-                                pd.dismiss();
+                  //              pd.dismiss();
 
                             }
                             else
                             {
-                                pd.hide();
+                    //            pd.hide();
                                 Toast.makeText(VehicleFillingActivity.this," not Successful",Toast.LENGTH_LONG).show() ;
                             }
                         }
@@ -362,16 +362,16 @@ public class VehicleFillingActivity extends AppCompatActivity {
 
                         Picasso.with(VehicleFillingActivity.this).load(imageUri.toString()).into(vehimagbtn);
                         Toast.makeText(VehicleFillingActivity.this,"Success veh",Toast.LENGTH_LONG).show();
-
+                        imgveh = imageUri.toString();
                     }
                 });
 
-                filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                /*filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
                         imgveh = uri.toString() ;
                     }
-                });
+                });*/
 
                    // Picasso.with(VehicleFillingActivity.this).load(imgveh).into(vehimagbtn);
 
@@ -386,35 +386,23 @@ public class VehicleFillingActivity extends AppCompatActivity {
 
                             Picasso.with(VehicleFillingActivity.this).load(imageUri.toString()).into(rcimagbtn);
                             Toast.makeText(VehicleFillingActivity.this,"Success rc",Toast.LENGTH_LONG).show();
-
+                            imgrc = imageUri.toString();
                         }
                     });
 
-                    filePath1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    /*filePath1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
                             imgrc = uri.toString() ;
                         }
-                    });
-                    Picasso.with(VehicleFillingActivity.this).load(imgrc).into(rcimagbtn);
+                    });*/
+                    //Picasso.with(VehicleFillingActivity.this).load(imgrc).into(rcimagbtn);
                 }
 
             }
 
         }
 
-    public static String random()
-    {
-        Random gen = new Random() ;
-        StringBuilder randomStringBuilder = new StringBuilder() ;
-        int randomLength = gen.nextInt(10) ;
-        char tempChar ;
-        for(int i=0;i<randomLength;i++)
-        {
-            tempChar = (char) (gen.nextInt(96)+32) ;
-            randomStringBuilder.append(tempChar) ;
-        }
-        return randomStringBuilder.toString() ;
-    }
+
 
     }
