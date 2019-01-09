@@ -59,13 +59,14 @@ public class Home2Activity extends AppCompatActivity
         fuser = FirebaseAuth.getInstance().getCurrentUser();
 
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(fuser.getUid()).child("Account details");
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Home2Activity.this,VehicleFillingActivity.class));
+
+                startActivity(new Intent(Home2Activity.this,MyvehiclesActivity.class));
             }
-        });*/
+        });
 
        pd = new ProgressDialog(this);
        pd.setMessage("Please wait...");

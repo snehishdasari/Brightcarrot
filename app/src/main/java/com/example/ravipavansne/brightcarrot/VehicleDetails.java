@@ -16,6 +16,7 @@ public class VehicleDetails {
     public String colorv ;
     public String fuel ;
     public String rating ;
+    public String availability ;
 
     public VehicleDetails(){}
 
@@ -36,6 +37,13 @@ public class VehicleDetails {
         this.rating = rating;
     }
 
+    public String getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(String availability) {
+        this.availability = availability;
+    }
 
     public String getVehiclename() {
         return vehiclename;

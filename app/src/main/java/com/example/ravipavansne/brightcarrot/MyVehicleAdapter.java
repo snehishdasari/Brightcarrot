@@ -1,14 +1,18 @@
 package com.example.ravipavansne.brightcarrot;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +62,36 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.Myve
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("item",k) ;
                 context.startActivity(intent);
+            }
+        });
+        myvehicleViewHolder.linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                    Intent intent = new Intent(context,AvailableConfirmActivity.class) ;
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("item",k) ;
+                                    context.startActivity(intent);
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                Toast.makeText(context,"Its ok",Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getRootView().getContext());
+             //   builder.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT)
+                builder.setMessage("Are you sure You want to Add your Vehicle?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
+                return true;
             }
         });
 

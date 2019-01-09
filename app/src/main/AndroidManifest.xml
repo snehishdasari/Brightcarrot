@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ravipavansne.brightcarrot">
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -36,7 +38,9 @@
             android:label="@string/title_activity_home2"
             android:theme="@style/AppTheme" />
         <activity android:name=".VehicleFillingActivity" />
-        <activity android:name=".VehicleDisplayActivity"></activity>
+        <activity android:name=".VehicleDisplayActivity" />
+        <activity android:name=".VehicleDisplay2Activity" />
+        <activity android:name=".AvailableConfirmActivity"></activity>
     </application>
 
 </manifest>

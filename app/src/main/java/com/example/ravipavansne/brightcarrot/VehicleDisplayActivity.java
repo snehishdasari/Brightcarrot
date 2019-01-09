@@ -44,8 +44,8 @@ public class VehicleDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_display);
         Intent intent = getIntent() ;
-         i = intent.getIntExtra("item",0) ;
-         b=(CircleImageView)findViewById(R.id.backvehicledisplay);
+        i = intent.getIntExtra("item",0) ;
+        b=(CircleImageView)findViewById(R.id.backvehicledisplay);
         name = (TextView) findViewById(R.id.namevehdisp) ;
         color = (TextView) findViewById(R.id.colorvehdisp) ;
         kms = (TextView) findViewById(R.id.kmsvehdisp) ;

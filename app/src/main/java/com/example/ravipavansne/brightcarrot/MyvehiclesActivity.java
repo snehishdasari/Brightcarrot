@@ -58,6 +58,12 @@ public class MyvehiclesActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),Home2Activity.class));
             }
         });
+        recyclerView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                return false;
+            }
+        });
        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Vehicle Details");
 
 
