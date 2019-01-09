@@ -34,6 +34,7 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -402,5 +403,18 @@ public class VehicleFillingActivity extends AppCompatActivity {
 
         }
 
+    public static String random()
+    {
+        Random gen = new Random() ;
+        StringBuilder randomStringBuilder = new StringBuilder() ;
+        int randomLength = gen.nextInt(10) ;
+        char tempChar ;
+        for(int i=0;i<randomLength;i++)
+        {
+            tempChar = (char) (gen.nextInt(96)+32) ;
+            randomStringBuilder.append(tempChar) ;
+        }
+        return randomStringBuilder.toString() ;
+    }
 
     }
