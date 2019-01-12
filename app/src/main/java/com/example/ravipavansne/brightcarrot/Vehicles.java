@@ -9,6 +9,7 @@ public class Vehicles {
     String startdate ;
     String enddate ;
     int rating ;
+    private VehicleDetails v;
 
     public Vehicles(String name, String desc, int price, int image, String startdate, String enddate, int rating) {
         this.name = name;

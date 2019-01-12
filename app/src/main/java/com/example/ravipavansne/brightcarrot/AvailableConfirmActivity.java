@@ -89,6 +89,8 @@ public class AvailableConfirmActivity extends AppCompatActivity {
         edate= (Spinner) findViewById(R.id.spinneredate) ;
         emonth= (Spinner) findViewById(R.id.spinneremonth) ;
         eyear= (Spinner) findViewById(R.id.spinnereyear) ;
+        addrtil = (TextInputLayout)findViewById(R.id.addrconfirm);
+        phonetil = (TextInputLayout)findViewById(R.id.phoneconfirm);
         list = new ArrayList<>() ;
         cnfm = (Button) findViewById(R.id.confirm) ;
 
@@ -191,6 +193,28 @@ public class AvailableConfirmActivity extends AppCompatActivity {
                             list.add(v) ;
                         }
                         u = list.get(f) ;
+                        u.setPrice(p);
+                        u.setStartday(sday);
+                        u.setStarttime(stime);
+                        u.setEndday(eday);
+                        u.setEndtime(etime);
+                        u.setContactaddress(adrs);
+                        u.setContactphone(contact);
+                        u.setAvailability("true");
+                        DatabaseReference d1 = FirebaseDatabase.getInstance().getReference().child("Users").child(u.getOwnerid()).child("Account Details");
+                        d1.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                ownername = dataSnapshot.child("firstname").getValue().toString()  ;
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        u.setOwnername(ownername);
+
                         final DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Available Vehicles").child(u.getVehicleid()) ;
                         databaseReference1.setValue(u).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -206,27 +230,11 @@ public class AvailableConfirmActivity extends AppCompatActivity {
                             }
                         });
 
-                       /* databaseReference1.child("price").setValue(p) ;
-                        databaseReference1.child("starttime").setValue(stime) ;
-                        databaseReference1.child("endtime").setValue(etime) ;
-                        databaseReference1.child("startday").setValue(sday) ;
-                        databaseReference1.child("endday").setValue(eday) ;
-                        databaseReference1.child("contactaddress").setValue(adrs) ;
-                        databaseReference1.child("contactphone").setValue(contact) ;
-                        DatabaseReference d1 = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Account Details");
-                        d1.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                ownername = dataSnapshot.child("firstname").getValue().toString() +" "+ dataSnapshot.child("lastname").getValue().toString() ;
-                            }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            }
-                        });
+
                         databaseReference1.child("ownername").setValue(ownername) ;
-*/
+
                     }
 
                     @Override

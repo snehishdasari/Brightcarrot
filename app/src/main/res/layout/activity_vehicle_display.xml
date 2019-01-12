@@ -60,7 +60,10 @@
 
 
         </RelativeLayout>
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.25">
         <ImageView
             android:id="@+id/imvehdisp"
             android:layout_width="match_parent"
@@ -69,8 +72,15 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_weight="1.25"
             android:src="@drawable/background"/>
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/vehimgprogbar"
+                android:layout_centerVertical="true"
+                android:indeterminate="true"/>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

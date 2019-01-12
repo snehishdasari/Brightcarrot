@@ -14,9 +14,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.aminography.redirectglide.GlideApp;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -82,6 +85,8 @@ public class VehicleFillingActivity extends AppCompatActivity {
     private CircleImageView back;
     private String vid;
     private boolean switchimage;
+    private ProgressBar vehimgpb;
+    private ProgressBar rcimgpb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +110,8 @@ public class VehicleFillingActivity extends AppCompatActivity {
         vehicleImage = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
+        vehimgpb = (ProgressBar)findViewById(R.id.vehimgpb);
+        rcimgpb = (ProgressBar)findViewById(R.id.rcimgpb);
 
         back = (CircleImageView)findViewById(R.id.backvehiclefilling);
         back.setOnClickListener(new View.OnClickListener() {
@@ -209,8 +215,12 @@ public class VehicleFillingActivity extends AppCompatActivity {
                     yearpsd.setSelection(yearadapter.getPosition(psd[2]));
                     String a = VehicleDisplayActivity.list.get(flag).getVehicleimage();
                     String b = VehicleDisplayActivity.list.get(flag).getRc();
-                    Picasso.with(VehicleFillingActivity.this).load(a).into(vehimagbtn);
-                    Picasso.with(VehicleFillingActivity.this).load(b).into(rcimagbtn);
+                    vehimgpb.setVisibility(View.VISIBLE);
+                    rcimgpb.setVisibility(View.VISIBLE);
+                    GlideApp.with(VehicleFillingActivity.this).load(a).into(vehimagbtn);
+                    vehimgpb.setVisibility(View.GONE);
+                    GlideApp.with(VehicleFillingActivity.this).load(b).into(rcimagbtn);
+                    rcimgpb.setVisibility(View.GONE);
                     imgveh = a;
                     imgrc = b;
                 }
@@ -360,7 +370,9 @@ public class VehicleFillingActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                        Picasso.with(VehicleFillingActivity.this).load(imageUri.toString()).into(vehimagbtn);
+                        vehimgpb.setVisibility(View.VISIBLE);
+                        GlideApp.with(VehicleFillingActivity.this).load(imageUri.toString()).into(vehimagbtn);
+                        vehimgpb.setVisibility(View.GONE);
                         Toast.makeText(VehicleFillingActivity.this,"Success veh",Toast.LENGTH_LONG).show();
                         imgveh = imageUri.toString();
                     }
@@ -384,7 +396,9 @@ public class VehicleFillingActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            Picasso.with(VehicleFillingActivity.this).load(imageUri.toString()).into(rcimagbtn);
+                            rcimgpb.setVisibility(View.VISIBLE);
+                            GlideApp.with(VehicleFillingActivity.this).load(imageUri.toString()).into(rcimagbtn);
+                            rcimgpb.setVisibility(View.GONE);
                             Toast.makeText(VehicleFillingActivity.this,"Success rc",Toast.LENGTH_LONG).show();
                             imgrc = imageUri.toString();
                         }

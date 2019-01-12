@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +41,7 @@ public class VehicleDisplayActivity extends AppCompatActivity {
     public static List<VehicleDetails> list ;
     private CircleImageView b;
     private int i;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +57,7 @@ public class VehicleDisplayActivity extends AppCompatActivity {
         fuelused = (TextView) findViewById(R.id.fuelvehdisp) ;
         vehimage = (ImageView) findViewById(R.id.imvehdisp) ;
         edit = (TextView)findViewById(R.id.editvehfill);
+        progressBar = (ProgressBar)findViewById(R.id.vehimgprogbar);
         list = new ArrayList<VehicleDetails>() ;
         head = (TextView) findViewById(R.id.vehicledisplayheading) ;
         b.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +89,9 @@ public class VehicleDisplayActivity extends AppCompatActivity {
                 psd.setText("Last Serviced Date   :   "+list.get(i).getPsd());
                 head.setText(list.get(i).getVehicleno());
                 fuelused.setText("Fuel Used   :   "+list.get(i).getFuel());
-                Picasso.with(VehicleDisplayActivity.this).load(list.get(i).getVehicleimage()).into(vehimage);
+                progressBar.setVisibility(View.VISIBLE);
+                Glide.with(VehicleDisplayActivity.this).load(list.get(i).getVehicleimage()).into(vehimage);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override

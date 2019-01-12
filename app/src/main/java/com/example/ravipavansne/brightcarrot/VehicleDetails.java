@@ -17,6 +17,103 @@ public class VehicleDetails {
     public String fuel ;
     public String rating ;
     public String availability ;
+    public String price ;
+    public String startday ;
+    public String starttime ;
+    public String endday ;
+    public String endtime ;
+    public String contactaddress ;
+    public String contactphone ;
+    public String ownername ;
+
+    public String getOwnername() {
+        return ownername;
+    }
+
+    public void setOwnername(String ownername) {
+        this.ownername = ownername;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getStartday() {
+        return startday;
+    }
+
+    public void setStartday(String startday) {
+        this.startday = startday;
+    }
+
+    public String getStarttime() {
+        return starttime;
+    }
+
+    public void setStarttime(String starttime) {
+        this.starttime = starttime;
+    }
+
+    public String getEndday() {
+        return endday;
+    }
+
+    public void setEndday(String endday) {
+        this.endday = endday;
+    }
+
+    public String getEndtime() {
+        return endtime;
+    }
+
+    public void setEndtime(String endtime) {
+        this.endtime = endtime;
+    }
+
+    public String getContactaddress() {
+        return contactaddress;
+    }
+
+    public void setContactaddress(String contactaddress) {
+        this.contactaddress = contactaddress;
+    }
+
+    public String getContactphone() {
+        return contactphone;
+    }
+
+    public void setContactphone(String contactphone) {
+        this.contactphone = contactphone;
+    }
+
+    public VehicleDetails(String vehiclename, String vehicleimage, String vehicleno, String vehicleid, String ownerid, String rc, String dop, String type, String nokms, String psd, String colorv, String fuel, String rating, String availability, String price, String startday, String starttime, String endday, String endtime, String contactaddress, String contactphone,String ownername) {
+        this.vehiclename = vehiclename;
+        this.vehicleimage = vehicleimage;
+        this.vehicleno = vehicleno;
+        this.vehicleid = vehicleid;
+        this.ownerid = ownerid;
+        this.rc = rc;
+        this.dop = dop;
+        this.type = type;
+        this.nokms = nokms;
+        this.psd = psd;
+        this.colorv = colorv;
+        this.fuel = fuel;
+        this.rating = rating;
+        this.availability = availability;
+        this.price = price;
+        this.startday = startday;
+        this.starttime = starttime;
+        this.endday = endday;
+        this.endtime = endtime;
+        this.ownername = ownername ;
+        this.contactaddress = contactaddress;
+        this.contactphone = contactphone;
+    }
 
     public VehicleDetails(){}
 
