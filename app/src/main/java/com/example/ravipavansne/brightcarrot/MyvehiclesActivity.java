@@ -29,7 +29,7 @@ public class MyvehiclesActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private DatabaseReference databaseReference;
     private FirebaseUser firebaseUser;
-    private List<VehicleDetails> arrayList;
+    public static List<VehicleDetails> arrayList;
     private ProgressDialog progressDialog ;
     private MyVehicleAdapter myVehicleAdapter;
     private ImageView back;
