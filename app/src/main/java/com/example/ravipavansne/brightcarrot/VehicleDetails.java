@@ -118,6 +118,7 @@ public class VehicleDetails {
     public VehicleDetails(){}
 
 
+
     public VehicleDetails(String vehiclename, String vehicleimage, String vehicleno, String vehicleid, String ownerid, String rc, String dop, String type, String nokms, String psd, String colorv, String fuel, String rating) {
         this.vehiclename = vehiclename;
         this.vehicleimage = vehicleimage;
@@ -133,6 +134,7 @@ public class VehicleDetails {
         this.fuel = fuel;
         this.rating = rating;
     }
+
 
     public String getAvailability() {
         return availability;

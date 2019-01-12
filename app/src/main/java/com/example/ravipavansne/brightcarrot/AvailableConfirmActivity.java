@@ -75,7 +75,7 @@ public class AvailableConfirmActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_available_confirm);
-        Intent intent=getIntent();
+        final Intent intent=getIntent();
          f = intent.getIntExtra("item",-1);
 
         pricetil = (TextInputLayout) findViewById(R.id.priceconfirm) ;
@@ -117,18 +117,18 @@ public class AvailableConfirmActivity extends AppCompatActivity {
         }
 
         months = new ArrayList<>();
-        months.add("January");
-        months.add("February");
-        months.add("March");
-        months.add("April");
+        months.add("Jan");
+        months.add("Feb");
+        months.add("Mar");
+        months.add("Apr");
         months.add("May");
-        months.add("June");
-        months.add("July");
-        months.add("August");
-        months.add("September");
-        months.add("October");
-        months.add("November");
-        months.add("December");
+        months.add("Jun");
+        months.add("Jul");
+        months.add("Aug");
+        months.add("Sep");
+        months.add("Oct");
+        months.add("Nov");
+        months.add("Dec");
 
 
         years = new ArrayList<>();
@@ -201,11 +201,31 @@ public class AvailableConfirmActivity extends AppCompatActivity {
                         u.setContactaddress(adrs);
                         u.setContactphone(contact);
                         u.setAvailability("true");
-                        DatabaseReference d1 = FirebaseDatabase.getInstance().getReference().child("Users").child(u.getOwnerid()).child("Account Details");
+                        DatabaseReference d1 = FirebaseDatabase.getInstance().getReference().child("Users").child(u.getOwnerid()).child("Account details");
                         d1.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 ownername = dataSnapshot.child("firstname").getValue().toString()  ;
+                                u.setOwnername(ownername);
+
+                                final DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Available Vehicles").child(u.getType()).child(u.getVehicleid()) ;
+                                databaseReference1.setValue(u).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful())
+                                        {
+                                            Toast.makeText(AvailableConfirmActivity.this,"Added to Market",Toast.LENGTH_SHORT).show();
+                                            Intent i = new Intent(getApplicationContext(),Home2Activity.class);
+                                            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(i);
+                                            finish();
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(AvailableConfirmActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                             }
 
                             @Override
@@ -213,27 +233,12 @@ public class AvailableConfirmActivity extends AppCompatActivity {
 
                             }
                         });
-                        u.setOwnername(ownername);
-
-                        final DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Available Vehicles").child(u.getVehicleid()) ;
-                        databaseReference1.setValue(u).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful())
-                                {
-                                    Toast.makeText(AvailableConfirmActivity.this,"Done",Toast.LENGTH_SHORT).show();
-                                }
-                                else
-                                {
-                                    Toast.makeText(AvailableConfirmActivity.this,"Not Done",Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
 
 
 
 
-                        databaseReference1.child("ownername").setValue(ownername) ;
+
+
 
                     }
 
@@ -251,5 +256,7 @@ public class AvailableConfirmActivity extends AppCompatActivity {
 
 
 
+
     }
+
 }

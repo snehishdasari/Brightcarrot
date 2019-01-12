@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.aminography.redirectglide.GlideApp;
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -15,9 +17,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleViewHolder>
 {
     private Context context ;
-    private List<Vehicles> list ;
+    private List<VehicleDetails> list ;
 
-    public VehicleAdapter(Context context, List<Vehicles> list) {
+    public VehicleAdapter(Context context, List<VehicleDetails> list) {
         this.context = context;
         this.list = list;
     }
@@ -33,13 +35,20 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
 
     @Override
     public void onBindViewHolder(@NonNull VehicleViewHolder viewHolder, int i) {
-        Vehicles vehicles = list.get(i) ;
-        viewHolder.circleImageView.setImageResource(vehicles.getImage());
-        viewHolder.namev.setText(vehicles.getName());
-        viewHolder.descv.setText(vehicles.getDesc());
-        viewHolder.pricev.setText(vehicles.getPrice()+"/- Per hour") ;
-        viewHolder.datev.setText(vehicles.getStartdate()+" - "+vehicles.getEnddate());
+        VehicleDetails vehicles = list.get(i) ;
+        GlideApp.with(context).load(vehicles.getVehicleimage()).into(viewHolder.circleImageView);
+        viewHolder.namev.setText(vehicles.getVehiclename());
+        viewHolder.descv.setText(vehicles.getOwnername());
+        String a[] = vehicles.getStartday().split("/");
+        String b[] = vehicles.getEndday().split("/");
+        viewHolder.pricev.setText("Rs."+vehicles.getPrice()+"/-  Per hour") ;
+        viewHolder.datev.setText(a[0]+"/"+a[1]+" - "+b[0]+"/"+b[1]);
         viewHolder.ratev.setText(vehicles.getRating()+"/5");
+        viewHolder.vehinumber.setText(vehicles.getVehicleno());
+        if(vehicles.getType().equals("Bike"))
+            viewHolder.vehinumber.setBackgroundResource(R.drawable.roundbuttonblue);
+        else if(vehicles.getType().equals("HeavyVehicle"))
+            viewHolder.vehinumber.setBackgroundResource(R.drawable.roundbuttongreen);
 
     }
 
@@ -52,7 +61,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
 
 
         public CircleImageView circleImageView ;
-        public TextView namev,descv,pricev,datev,ratev ;
+        public TextView namev,descv,pricev,datev,ratev,vehinumber ;
 
         public VehicleViewHolder(@NonNull View itemView) {
 
@@ -63,6 +72,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
             pricev = (TextView) itemView.findViewById(R.id.priceid) ;
             datev  = (TextView) itemView.findViewById(R.id.dateid);
             ratev = (TextView) itemView.findViewById(R.id.ratingid) ;
+            vehinumber = (TextView) itemView.findViewById(R.id.vehinumber);
 
 
         }
