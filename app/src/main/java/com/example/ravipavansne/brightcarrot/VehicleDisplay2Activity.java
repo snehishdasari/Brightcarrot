@@ -164,12 +164,21 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful())
                                     {
-                                        Toast.makeText(VehicleDisplay2Activity.this,"Booked bro",Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(VehicleDisplay2Activity.this,Home2Activity.class));
+                                        databaseReference.child(vid).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful())
+                                                {
+                                                    Toast.makeText(getApplicationContext(), "bla", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
                                     }
                                 }
                             });
 
-                            databaseReference.child(vid).removeValue() ;
+
                         }
 
                         @Override
