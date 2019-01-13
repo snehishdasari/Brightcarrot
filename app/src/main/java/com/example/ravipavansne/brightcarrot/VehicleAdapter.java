@@ -1,6 +1,7 @@
 package com.example.ravipavansne.brightcarrot;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,7 +36,8 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
 
     @Override
     public void onBindViewHolder(@NonNull VehicleViewHolder viewHolder, int i) {
-        VehicleDetails vehicles = list.get(i) ;
+        final int k = i ;
+        final VehicleDetails vehicles = list.get(i) ;
         GlideApp.with(context).load(vehicles.getVehicleimage()).into(viewHolder.circleImageView);
         viewHolder.namev.setText(vehicles.getVehiclename());
         viewHolder.descv.setText(vehicles.getOwnername());
@@ -49,6 +51,16 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
             viewHolder.vehinumber.setBackgroundResource(R.drawable.roundbuttonblue);
         else if(vehicles.getType().equals("HeavyVehicle"))
             viewHolder.vehinumber.setBackgroundResource(R.drawable.roundbuttongreen);
+        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,VehicleDisplay2Activity.class) ;
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("item",k) ;
+                intent.putExtra("categ",vehicles.getType()) ;
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -62,6 +74,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
 
         public CircleImageView circleImageView ;
         public TextView namev,descv,pricev,datev,ratev,vehinumber ;
+        public android.widget.LinearLayout  parentLayout ;
 
         public VehicleViewHolder(@NonNull View itemView) {
 
@@ -73,6 +86,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
             datev  = (TextView) itemView.findViewById(R.id.dateid);
             ratev = (TextView) itemView.findViewById(R.id.ratingid) ;
             vehinumber = (TextView) itemView.findViewById(R.id.vehinumber);
+            parentLayout = (android.widget.LinearLayout) itemView.findViewById(R.id.parentlayout) ;
 
 
         }

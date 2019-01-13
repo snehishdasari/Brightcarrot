@@ -60,15 +60,15 @@ public class VehicleDisplayActivity extends AppCompatActivity {
         progressBar = (ProgressBar)findViewById(R.id.vehimgprogbar);
         list = new ArrayList<VehicleDetails>() ;
         head = (TextView) findViewById(R.id.vehicledisplayheading) ;
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),MyvehiclesActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(i);
-                finish();
-            }
-        });
+            b.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getApplicationContext(),MyvehiclesActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                    finish();
+                }
+            });
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Vehicle Details") ;
         databaseReference.addValueEventListener(new ValueEventListener() {

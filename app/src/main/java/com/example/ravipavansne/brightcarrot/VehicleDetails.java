@@ -26,6 +26,16 @@ public class VehicleDetails {
     public String contactphone ;
     public String ownername ;
 
+    public String bookedby ;
+    public String getBookedby() {
+        return bookedby;
+    }
+
+    public void setBookedby(String bookedby) {
+        this.bookedby = bookedby;
+    }
+
+
     public String getOwnername() {
         return ownername;
     }
@@ -90,7 +100,7 @@ public class VehicleDetails {
         this.contactphone = contactphone;
     }
 
-    public VehicleDetails(String vehiclename, String vehicleimage, String vehicleno, String vehicleid, String ownerid, String rc, String dop, String type, String nokms, String psd, String colorv, String fuel, String rating, String availability, String price, String startday, String starttime, String endday, String endtime, String contactaddress, String contactphone,String ownername) {
+    public VehicleDetails(String vehiclename, String vehicleimage, String vehicleno, String vehicleid, String ownerid, String rc, String dop, String type, String nokms, String psd, String colorv, String fuel, String rating, String availability, String price, String startday, String starttime, String endday, String endtime, String contactaddress, String contactphone,String ownername,String bookedby) {
         this.vehiclename = vehiclename;
         this.vehicleimage = vehicleimage;
         this.vehicleno = vehicleno;
@@ -113,6 +123,7 @@ public class VehicleDetails {
         this.ownername = ownername ;
         this.contactaddress = contactaddress;
         this.contactphone = contactphone;
+        this.bookedby = bookedby ;
     }
 
     public VehicleDetails(){}
