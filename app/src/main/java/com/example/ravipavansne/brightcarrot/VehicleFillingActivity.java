@@ -292,7 +292,7 @@ public class VehicleFillingActivity extends AppCompatActivity {
 
 
                     vehicleDetails = new VehicleDetails(nameov,imgveh,nov,vid,id,imgrc,ddop+"/"+mdop+"/"+ydop,categ,kms,dpsd+"/"+mpsd+"/"+ypsd,cov,fu,"5") ;
-
+                    vehicleDetails.setAvailability("false");
                     databaseReference.child("Users").child(id).child("Vehicle Details").child(vid).setValue(vehicleDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
