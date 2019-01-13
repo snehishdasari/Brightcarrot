@@ -49,6 +49,13 @@ public class Home2Activity extends AppCompatActivity
     private ProgressDialog progressDialog;
     private DatabaseReference databaseReference;
     private ProgressDialog pd;
+    private BankDetails bankDetails;
+    private TextInputLayout t1;
+    private TextInputLayout t3;
+    private TextInputLayout t2;
+    private TextInputLayout t4;
+    private Button banksave;
+    private Button bankedit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -259,6 +266,12 @@ public class Home2Activity extends AppCompatActivity
         else if(id== R.id.myvehicles_nav)
         {
             startActivity(new Intent(Home2Activity.this,MyvehiclesActivity.class));
+        }
+        else if(id==R.id.bank_nav){
+
+        startActivity(new Intent(Home2Activity.this,BankDetails2.class));
+
+
         }
         else if(id== R.id.logout_nav)
         {

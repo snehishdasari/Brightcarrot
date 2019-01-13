@@ -13,8 +13,11 @@
             android:title="Change Password"
             />
         <item
+            android:id="@+id/bank_nav"
+            android:title="Bank Details"
+            />
+        <item
             android:id="@+id/previousrides_nav"
-
             android:title="Previous Rides" />
         <item
             android:id="@+id/myvehicles_nav"

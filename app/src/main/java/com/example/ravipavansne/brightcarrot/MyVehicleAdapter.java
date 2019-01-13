@@ -1,18 +1,34 @@
 package com.example.ravipavansne.brightcarrot;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
+import android.support.v4.widget.CircularProgressDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +39,14 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.Myve
 
     private Context context;
     private List<VehicleDetails> list;
+    private ProgressDialog progressDialog;
+    private BankDetails bankDetails;
+    private TextInputLayout t1;
+    private TextInputLayout t3;
+    private TextInputLayout t2;
+    private TextInputLayout t4;
+    private Button banksave;
+    private Button bankedit;
     private final View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -72,11 +96,40 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.Myve
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
-                            case DialogInterface.BUTTON_POSITIVE:
-                                    Intent intent = new Intent(context,AvailableConfirmActivity.class) ;
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intent.putExtra("item",k) ;
-                                    context.startActivity(intent);
+                            case DialogInterface.BUTTON_POSITIVE:{
+                                FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
+                                final DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Users").child(fuser.getUid()).child("Bank Details");
+                                db.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                        if(dataSnapshot.child("flag").getValue().toString().equals("false")) {
+
+                                            Intent intent = new Intent(context,BankDetails2.class) ;
+                                            Toast.makeText(context, "Please add your bank details first", Toast.LENGTH_SHORT).show();
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            context.startActivity(intent);
+
+
+                                        }
+                                        else{
+
+                                            Intent intent = new Intent(context,AvailableConfirmActivity.class) ;
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            intent.putExtra("item",k) ;
+                                            context.startActivity(intent);
+
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                                 }
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
