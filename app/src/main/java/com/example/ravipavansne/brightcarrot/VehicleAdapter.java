@@ -18,6 +18,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleViewHolder>
 {
     private Context context ;
+    public static VehicleDetails displayvehicle;
     private List<VehicleDetails> list ;
 
     public VehicleAdapter(Context context, List<VehicleDetails> list) {
@@ -56,8 +57,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
             public void onClick(View view) {
                 Intent intent = new Intent(context,VehicleDisplay2Activity.class) ;
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("item",k) ;
-                intent.putExtra("categ",vehicles.getType()) ;
+               displayvehicle = list.get(k);
                 context.startActivity(intent);
             }
         });

@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aminography.redirectglide.GlideApp;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -51,8 +52,8 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
 
     private DatabaseReference databaseReference ;
 
-    public static List<VehicleDetails> list ;
-    public static List<VehicleDetails> list2 ;
+    private List<VehicleDetails> list ;
+    private List<VehicleDetails> list2 ;
     private CircleImageView b ;
     private ProgressBar progressBar;
     private ProgressBar progressBar2 ;
@@ -63,8 +64,7 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_display2);
         Intent intent = getIntent() ;
-        i = intent.getIntExtra("item",0) ;
-        categ = intent.getStringExtra("categ") ;
+        int index = intent.getIntExtra("item",-1);
         b=(CircleImageView)findViewById(R.id.backvehicledisplay2);
         name = (TextView) findViewById(R.id.namevehdisp2) ;
         color = (TextView) findViewById(R.id.colorvehdisp2) ;
@@ -96,100 +96,66 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
                 finish();
             }
         });
+        vehimage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        rcimage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        String n = VehicleAdapter.displayvehicle.getVehiclename() ;
+        name.setText("Name   :   "+n);
+        color.setText("Colour   :   "+VehicleAdapter.displayvehicle.getColorv());
+        kms.setText("Kilometers travelled   :   "+VehicleAdapter.displayvehicle.getNokms());
+        dop.setText("Date Of Purchase  :  "+VehicleAdapter.displayvehicle.getDop());
+        psd.setText("Last Serviced Date   :   "+VehicleAdapter.displayvehicle.getPsd());
+        head.setText(VehicleAdapter.displayvehicle.getVehicleno());
+        fuelused.setText("Fuel Used   :   "+VehicleAdapter.displayvehicle.getFuel());
+        progressBar.setVisibility(View.VISIBLE);
+        GlideApp.with(VehicleDisplay2Activity.this).load(VehicleAdapter.displayvehicle.getVehicleimage()).into(vehimage);
+        progressBar.setVisibility(View.GONE);
+        price.setText("Price   :   "+VehicleAdapter.displayvehicle.getPrice());
+        from.setText("Available from   :   "+VehicleAdapter.displayvehicle.getStartday() +" "+VehicleAdapter.displayvehicle.getStarttime());
+        to.setText("Available till   :   "+VehicleAdapter.displayvehicle.getEndday() +" "+VehicleAdapter.displayvehicle.getEndtime());
+        addr.setText("Available at  : "+VehicleAdapter.displayvehicle.getContactaddress());
+        numb.setText("Contact Details   : "+VehicleAdapter.displayvehicle.getContactphone());
+        owner.setText("Owner name  :  "+VehicleAdapter.displayvehicle.getOwnername()) ;
+        progressBar2.setVisibility(View.VISIBLE);
+        GlideApp.with(VehicleDisplay2Activity.this).load(VehicleAdapter.displayvehicle.getRc()).into(rcimage) ;
+        progressBar2.setVisibility(View.GONE);
+        if(index==0)
+            booked.setVisibility(View.GONE);
+        booked.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            databaseReference = FirebaseDatabase.getInstance().getReference().child("Available Vehicles").child(categ) ;
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    list.clear();
-
-                    for(DataSnapshot d : dataSnapshot.getChildren())
-                    {
-                        VehicleDetails v = d.getValue(VehicleDetails.class) ;
-                        list.add(v) ;
-                    }
-                    String n = list.get(i).getVehiclename() ;
-                    name.setText("Name   :   "+n);
-                    color.setText("Colour   :   "+list.get(i).getColorv());
-                    kms.setText("Kilometers travelled   :   "+list.get(i).getNokms());
-                    dop.setText("Date Of Purchase  :  "+list.get(i).getDop());
-                    psd.setText("Last Serviced Date   :   "+list.get(i).getPsd());
-                    head.setText(list.get(i).getVehicleno());
-                    fuelused.setText("Fuel Used   :   "+list.get(i).getFuel());
-                    progressBar.setVisibility(View.VISIBLE);
-                    Glide.with(VehicleDisplay2Activity.this).load(list.get(i).getVehicleimage()).into(vehimage);
-                    progressBar.setVisibility(View.GONE);
-                    price.setText("Price   :   "+list.get(i).getPrice());
-                    from.setText("Available from   :   "+list.get(i).getStartday() +" "+list.get(i).getStarttime());
-                    to.setText("Available till   :   "+list.get(i).getEndday() +" "+list.get(i).getEndtime());
-                    addr.setText("Available at  : "+list.get(i).getContactaddress());
-                    numb.setText("Contact Details   : "+list.get(i).getContactphone());
-                    owner.setText("Owner name  :  "+list.get(i).getOwnername()) ;
-                    progressBar2.setVisibility(View.VISIBLE);
-                    Glide.with(VehicleDisplay2Activity.this).load(list.get(i).getRc()).into(rcimage) ;
-                    progressBar2.setVisibility(View.GONE);
-
-
-
-
-
+                if(VehicleAdapter.displayvehicle.getOwnerid().equals(firebaseUser.getUid())){
+                    Toast.makeText(VehicleDisplay2Activity.this, "You cannot book your own vehicle", Toast.LENGTH_SHORT).show();
                 }
+                else {
+                    String category = VehicleAdapter.displayvehicle.getType();
+                    String vid = VehicleAdapter.displayvehicle.getVehicleid();
+                    VehicleAdapter.displayvehicle.setBooked("true");
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                    databaseReference.child("Available Vehicles").child(category).child(vid).removeValue();
+                    databaseReference.child("Users").child(VehicleAdapter.displayvehicle.getOwnerid()).child("Booking Details")
+                            .child("My Rentals").child(vid).setValue(VehicleAdapter.displayvehicle);
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-
-
-            booked.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    databaseReference.addValueEventListener(new ValueEventListener() {
-
+                    databaseReference.child("Users").child(firebaseUser.getUid()).child("Booking Details").child("My Bookings")
+                            .child(vid).setValue(VehicleAdapter.displayvehicle).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            list2.clear();
-                            for(DataSnapshot d : dataSnapshot.getChildren())
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful())
                             {
-                                VehicleDetails v = d.getValue(VehicleDetails.class) ;
-                                list2.add(v) ;
+                                Toast.makeText(VehicleDisplay2Activity.this, "Vehicle Successfully booked", Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(VehicleDisplay2Activity.this,Bookings.class);
+                                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(i);
+                                finish();
                             }
-                             vid = list2.get(i).getVehicleid() ;
-                            VehicleDetails k = list2.get(i) ;
-                            k.setBookedby(firebaseUser.getUid());
-                            DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Booked Vehicles").child(list2.get(i).getType()).child(vid) ;
-                            db.setValue(k).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful())
-                                    {
-                                        startActivity(new Intent(VehicleDisplay2Activity.this,Home2Activity.class));
-                                        databaseReference.child(vid).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if(task.isSuccessful())
-                                                {
-                                                    Toast.makeText(getApplicationContext(), "bla", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
-                                    }
-                                }
-                            });
-
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
                         }
                     });
 
 
                 }
-            });
+
+            }
+        });
 
     }
 }
