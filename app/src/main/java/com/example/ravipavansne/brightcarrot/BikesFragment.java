@@ -60,7 +60,6 @@ public class BikesFragment extends Fragment {
                 for(DataSnapshot d:dataSnapshot.getChildren()){
 
                     VehicleDetails v = d.getValue(VehicleDetails.class) ;
-                    if(v.getAvailability() == "true")
                     listbikes.add(v);
                 }
 

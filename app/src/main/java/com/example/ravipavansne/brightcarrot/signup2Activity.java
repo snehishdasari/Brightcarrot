@@ -68,6 +68,9 @@ public class signup2Activity extends AppCompatActivity {
                                 u1.setFlag(false);
                                 u1.setPassword(passtext);
                                 databaseReference.child("Users").child(user.getUid()).child("Account details").setValue(u1);
+                                BankDetails bankDetails = new BankDetails();
+                                bankDetails.setFlag("false");
+                                databaseReference.child("Users").child(user.getUid()).child("Bank Details").setValue(bankDetails);
                                 user.sendEmailVerification();
                                 startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                                 }
