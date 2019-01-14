@@ -17,6 +17,10 @@
             android:title="Bank Details"
             />
         <item
+            android:id="@+id/currbookings_nav"
+            android:title="Current Bookings"
+            />
+        <item
             android:id="@+id/previousrides_nav"
             android:title="Previous Rides" />
         <item

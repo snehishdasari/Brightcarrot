@@ -88,6 +88,7 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.Myve
                 context.startActivity(intent);
             }
         });
+
         myvehicleViewHolder.linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -133,7 +134,7 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.Myve
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
-                                Toast.makeText(context,"Its ok",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context,"Its okay",Toast.LENGTH_SHORT).show();
                                 break;
                         }
                     }
@@ -141,6 +142,7 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.Myve
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getRootView().getContext());
              //   builder.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT)
+
                 builder.setMessage("Are you sure You want to Add your Vehicle?").setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
 

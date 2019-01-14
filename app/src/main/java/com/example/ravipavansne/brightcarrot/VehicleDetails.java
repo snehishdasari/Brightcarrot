@@ -25,8 +25,17 @@ public class VehicleDetails {
     public String contactaddress ;
     public String contactphone ;
     public String ownername ;
-
+    public String booked;
     public String bookedby ;
+
+    public String getBooked() {
+        return booked;
+    }
+
+    public void setBooked(String booked) {
+        this.booked = booked;
+    }
+
     public String getBookedby() {
         return bookedby;
     }

@@ -255,6 +255,7 @@ public class AvailableConfirmActivity extends AppCompatActivity {
                 u.setContactphone(contact);
                 u.setAvailability("true");
                 u.setOwnername(ownername);
+                u.setBooked("false");
 
                 FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Vehicle Details")
                         .child(u.getVehicleid()).child("availability").setValue("true").addOnCompleteListener(new OnCompleteListener<Void>() {

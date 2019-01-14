@@ -246,19 +246,12 @@ public class Home2Activity extends AppCompatActivity
                     dialog.dismiss();
                 }
             });
-
-
-
-
-
-
-
-
-
-
-
-
             }
+            else if(id==R.id.currbookings_nav){
+
+            startActivity(new Intent(Home2Activity.this,Bookings.class));
+
+        }
         else if(id== R.id.previousrides_nav)
         {
             startActivity(new Intent(Home2Activity.this,PreviousridesActivity.class));
