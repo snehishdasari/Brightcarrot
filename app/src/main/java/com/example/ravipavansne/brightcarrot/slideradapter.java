@@ -26,9 +26,9 @@ public class slideradapter extends PagerAdapter {
     }
 
     public int slide_images[]= {
-            R.drawable.ic_launcher_background,
-            R.drawable.ic_launcher_background,
-            R.drawable.ic_launcher_background
+            R.drawable.carimage,
+            R.drawable.bikeimage,
+            R.drawable.hvimage
     } ;
     public String slide_headings[]=
             {

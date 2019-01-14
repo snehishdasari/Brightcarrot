@@ -100,18 +100,18 @@ public class BankDetails2 extends AppCompatActivity {
         banksave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog = new ProgressDialog(getApplicationContext());
+             /*   progressDialog = new ProgressDialog(getApplicationContext());
                 progressDialog.setTitle("Adding Bank Details");
                 progressDialog.setMessage("Please wait while we add your bank details");
                 progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.show();
+                progressDialog.show();*/
 
 
                 if(t1.getEditText().getText().toString().isEmpty()||
                         t2.getEditText().getText().toString().isEmpty()||
                         t3.getEditText().getText().toString().isEmpty()||
                         t4.getEditText().getText().toString().isEmpty()){
-                    progressDialog.hide();
+                   // progressDialog.hide();
                     Toast.makeText(getApplicationContext(), "Fields Empty", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -127,7 +127,7 @@ public class BankDetails2 extends AppCompatActivity {
 
                             if(task.isSuccessful()) {
                                 Toast.makeText(getApplicationContext(), "Bank Details Added", Toast.LENGTH_SHORT).show();
-                                progressDialog.dismiss();
+                            //    progressDialog.dismiss();
                                 Intent i = new Intent(getApplicationContext(),Home2Activity.class);
                                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(i);
