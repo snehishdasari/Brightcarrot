@@ -21,16 +21,24 @@
         app:srcCompat="@drawable/ic_add_black_24dp" />
 
     <TextView
+        android:id="@+id/hellouser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Hello User"
+        android:textSize="20sp"
+        android:fontFamily="@font/acme"
+        android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/emailshow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textStyle="bold|italic"
+        android:textColor="#ffffff"
+        android:fontFamily="@font/acme"
+        android:textSize="16sp"
         android:text="xyz@gmail.com" />
 
 </LinearLayout>

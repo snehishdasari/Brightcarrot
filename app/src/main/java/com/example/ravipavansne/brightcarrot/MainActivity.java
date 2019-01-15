@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(slideradapter1);
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         if (fuser != null) {
-            if (fuser.isEmailVerified()) {
+             {
                 Intent i = new Intent(MainActivity.this, Home2Activity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);

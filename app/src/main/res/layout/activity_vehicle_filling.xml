@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@drawable/gradient"
+
     tools:context=".VehicleFillingActivity">
 <LinearLayout
     android:layout_width="match_parent"
@@ -15,7 +15,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    android:background="@drawable/roundbuttonyellow"
+    android:background="@drawable/roundbuttonblue"
     >
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -35,7 +35,7 @@
         android:id="@+id/vehiclefillingheading"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/backvehiclefilling"
-        android:background="@drawable/roundbuttonyellow"
+        android:background="@drawable/roundbuttonblue"
         android:textColor="#000000"
 
         android:textSize="25sp"
@@ -65,7 +65,7 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:textColorHint="#ffffff"
+
         android:id="@+id/namevehfill"
         android:layout_margin="15dp"
         >
@@ -74,13 +74,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Full Name of Vehicle"
-            android:textColorHint="#ffffff"
+
             android:drawableLeft="@drawable/ic_directions_car_black_24dp"
 
             android:textSize="18sp"
             android:drawablePadding="12dp"
             android:maxLines="2"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:fontFamily="@font/acme"/>
 
     </android.support.design.widget.TextInputLayout>
@@ -88,7 +88,6 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:textColorHint="#ffffff"
         android:layout_margin="15dp"
         android:id="@+id/novehfill"
         >
@@ -98,12 +97,12 @@
             android:textSize="18sp"
             android:layout_height="match_parent"
             android:hint="Registration Number  of  Vehicle"
-            android:textColorHint="#ffffff"
+
             android:drawableLeft="@drawable/ic_format_list_numbered_black_24dp"
 
             android:drawablePadding="12dp"
             android:maxLines="2"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:fontFamily="@font/acme"/>
 
     </android.support.design.widget.TextInputLayout>
@@ -111,7 +110,7 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:textColorHint="#ffffff"
+
         android:id="@+id/colvehfill"
         android:layout_margin="15dp"
         >
@@ -120,13 +119,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Color of  Vehicle"
-            android:textColorHint="#ffffff"
+
             android:drawableLeft="@drawable/ic_color_lens_black_24dp"
 
             android:drawablePadding="12dp"
             android:maxLines="2"
             android:textSize="18sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:fontFamily="@font/acme"/>
     </android.support.design.widget.TextInputLayout>
 
@@ -142,7 +141,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:drawablePadding="12dp"
 
             android:drawableLeft="@drawable/ic_list_black_24dp"
@@ -160,7 +159,7 @@
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 android:id="@+id/spinnercategory"
-                android:background="@android:color/white"
+                android:background="@android:drawable/btn_dropdown"
                 >
 
             </Spinner>
@@ -169,7 +168,7 @@
                 android:id="@+id/spinnerfuel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/white"
+                android:background="@android:drawable/btn_dropdown"
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 >
@@ -192,7 +191,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:drawablePadding="12dp"
             android:drawableLeft="@drawable/ic_date_range_black_24dp"
             android:fontFamily="@font/acme"
@@ -209,14 +208,14 @@
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 android:id="@+id/spinneryeardop"
-                android:background="@android:color/white"
+                android:background="@android:drawable/btn_dropdown"
                 >
 
             </Spinner>
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/white"
+                android:background="@android:drawable/btn_dropdown"
                 android:layout_weight="1"
                 android:id="@+id/spinnermonthdop"
                 android:layout_margin="5dp"
@@ -228,7 +227,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/spinnerdaydop"
-                android:background="@android:color/white"
+                android:background="@android:drawable/btn_dropdown"
                 android:layout_margin="5dp"
                 >
 
@@ -241,7 +240,7 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:textColorHint="#ffffff"
+
         android:id="@+id/kmsvehfill"
         android:layout_margin="15dp"
         >
@@ -249,13 +248,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Number of Kilometres travelled"
-            android:textColorHint="#ffffff"
             android:drawableLeft="@drawable/dist"
 
             android:drawablePadding="12dp"
             android:maxLines="2"
             android:textSize="18sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:fontFamily="@font/acme"/>
 
     </android.support.design.widget.TextInputLayout>
@@ -270,7 +268,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:drawablePadding="12dp"
             android:drawableLeft="@drawable/ic_date_range_black_24dp"
             android:fontFamily="@font/acme"
@@ -294,7 +292,7 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/white"
+                android:background="@android:drawable/btn_dropdown"
                 android:layout_weight="1"
                 android:id="@+id/spinnermonthpsd"
                 android:layout_margin="5dp"
@@ -306,7 +304,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/spinnerdaypsd"
-                android:background="@android:color/white"
+                android:background="@android:drawable/btn_dropdown"
                 android:layout_margin="5dp"
                 >
 
@@ -322,7 +320,7 @@
         android:gravity="center"
         android:text="Vehicle Image"
         android:textSize="20sp"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:fontFamily="@font/acme"/>
     <RelativeLayout
         android:layout_width="300dp"
@@ -354,7 +352,7 @@
         android:gravity="center"
         android:text="RC Image"
         android:textSize="20sp"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:fontFamily="@font/acme"/>
     <RelativeLayout
         android:layout_width="300dp"

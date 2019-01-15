@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/gradient"
+
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".VehicleDisplayActivity">
@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.9"
             android:layout_margin="8dp"
-            android:background="@drawable/roundbuttonyellow"
+            android:background="@drawable/roundbuttonlightblue"
             >
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -35,7 +35,7 @@
                 android:id="@+id/vehicledisplayheading"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/backvehicledisplay"
-                android:background="@drawable/roundbuttonyellow"
+                android:background="@drawable/roundbuttonlightblue"
                 android:textColor="#000000"
                 android:textSize="25sp"
 
@@ -115,7 +115,7 @@
             android:textSize="16sp"
             android:gravity="center"
             android:layout_margin="10dp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textAllCaps="true"
             android:text="Color    :      Red "
             android:fontFamily="@font/acme"/>
@@ -129,7 +129,7 @@
             android:gravity="center"
             android:textSize="16sp"
             android:textAllCaps="true"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:text="Fuel Used    :      Petrol"
             android:fontFamily="@font/acme"/>
 
@@ -140,7 +140,7 @@
             android:layout_height="match_parent"
             android:textSize="16sp"
             android:gravity="center"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textAllCaps="true"
             android:layout_margin="10dp"
             android:text="Date Of Purchase    :      21/08/99 "
@@ -152,7 +152,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="16sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textAllCaps="true"
             android:gravity="center"
             android:layout_margin="10dp"
@@ -166,7 +166,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="16sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textAllCaps="true"
             android:gravity="center"
             android:layout_margin="10dp"

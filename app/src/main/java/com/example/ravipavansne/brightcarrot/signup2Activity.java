@@ -135,6 +135,7 @@ public class signup2Activity extends AppCompatActivity {
                                 u1=new userdetails();
                                 u1.setFlag(false);
                                 u1.setPassword(passtext);
+                                u1.setLoggedby("brightcarrot");
                                 databaseReference.child("Users").child(user.getUid()).child("Account details").setValue(u1);
                                 BankDetails bankDetails = new BankDetails();
                                 bankDetails.setFlag("false");
@@ -171,9 +172,13 @@ public class signup2Activity extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             FirebaseUser user = firebaseAuth.getCurrentUser();
-                            u1 = new userdetails();
-                            u1.setFlag(false);
-                            // u1.setPassword(passtext);
+                            Toast.makeText(signup2Activity.this,"If you haven't entered details,Enter in Accont Details",Toast.LENGTH_SHORT).show();
+
+                           u1 = new userdetails();
+                            u1.setPassword("123456") ;
+                            u1.setLoggedby("facebook");
+                          u1.setFlag(true);
+
                             databaseReference.child("Users").child(user.getUid()).child("Account details").setValue(u1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -188,15 +193,33 @@ public class signup2Activity extends AppCompatActivity {
                                     Toast.makeText(signup2Activity.this, "Added Bank Details", Toast.LENGTH_SHORT).show();
                                 }
                             });
-
-
+                            String id = firebaseAuth.getCurrentUser().getUid();
+                        /*    databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(id).child("Account details");
+                            databaseReference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    String flag = dataSnapshot.child("flag").getValue().toString();
+                                    if (flag.equals("true")) {*/
                                         Intent i = new Intent(signup2Activity.this, Home2Activity.class);
                                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(i);
                                         finish();
 
-                                  
-                        }
+                                   /* } else {
+                                        Intent i = new Intent(signup2Activity.this, SignupActivity.class);
+                                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+
+
+                            });*/
 
 
                             if (!task.isSuccessful()) {
@@ -208,11 +231,11 @@ public class signup2Activity extends AppCompatActivity {
 
                         }
 
-                    });
-                }
+                    }
+                });
 
 
-
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

@@ -54,6 +54,7 @@ public class SignupActivity extends AppCompatActivity {
     private ProgressDialog progressDialog ;
     public static Button butt;
     private String pass1;
+    private String logged ;
     private DatabaseReference d;
         private ArrayList<String> months;
         private ArrayList<String> days;
@@ -225,7 +226,9 @@ public class SignupActivity extends AppCompatActivity {
 
                  flag1 = dataSnapshot.child("flag").getValue().toString();
                  pass1 = dataSnapshot.child("password").getValue().toString();
-                if(flag1.equals("true"))
+                 logged = dataSnapshot.child("loggedby").getValue().toString() ;
+
+                if(flag1.equals("true") && logged!="facebook")
                 {
                     String fname = dataSnapshot.child("firstname").getValue().toString() ;
                     String lname = dataSnapshot.child("lastname").getValue().toString() ;
@@ -313,6 +316,8 @@ public class SignupActivity extends AppCompatActivity {
                      u1 = new userdetails(fname, lname, addrs, mobileno, dayofbirth, monthofbirth, yearofbirth, state1, city1, email, flag);
                     u1.setId(firebaseUser.getUid());
                     u1.setFlag(true);
+
+                    if(logged!="facebook")
                     u1.setPassword(pass1);
 
 
