@@ -3,30 +3,32 @@ package com.example.ravipavansne.brightcarrot;
 public class VehicleDetails {
 
 
-    public String vehiclename ;
-    public String vehicleimage;
-    public String vehicleno ;
-    public String vehicleid ;
-    public String ownerid ;
-    public String rc ;
-    public String dop ;
-    public String type ;
-    public String nokms ;
-    public String psd ;
-    public String colorv ;
-    public String fuel ;
-    public String rating ;
-    public String availability ;
-    public String price ;
-    public String startday ;
-    public String starttime ;
-    public String endday ;
-    public String endtime ;
-    public String contactaddress ;
-    public String contactphone ;
-    public String ownername ;
-    public String booked;
-    public String bookedby ;
+    private String vehiclename ;
+    private String vehicleimage;
+    private String vehicleno ;
+    private String vehicleid ;
+    private String ownerid ;
+    private String rc ;
+    private String dop ;
+    private String type ;
+    private String nokms ;
+    private String psd ;
+    private String colorv ;
+    private String fuel ;
+    private String rating ;
+    private String availability ;
+    private String price ;
+    private String startday ;
+    private String starttime ;
+    private String endday ;
+    private String endtime ;
+    private String contactaddress ;
+    private String contactphone ;
+    private String ownername ;
+    private String booked;
+    private String bookedby ;
+    private String latitude;
+    private String longitude;
 
     public String getBooked() {
         return booked;
@@ -83,6 +85,22 @@ public class VehicleDetails {
 
     public void setEndday(String endday) {
         this.endday = endday;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
     public String getEndtime() {

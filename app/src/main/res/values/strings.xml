@@ -15,4 +15,6 @@
     <string name="facebook_app_id">810043906005065</string>
     <string name="fb_login_protocol_scheme">fb810043906005065</string>
     <string name="alreadylogin"><u>Already a user? Login</u>.</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_map">Map</string>
 </resources>

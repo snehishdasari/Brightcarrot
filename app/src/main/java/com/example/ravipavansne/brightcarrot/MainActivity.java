@@ -1,5 +1,6 @@
 package com.example.ravipavansne.brightcarrot;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.Signature ;
 import android.content.pm.PackageInfo;
@@ -14,12 +15,14 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.sql.Connection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
 
 public class MainActivity extends AppCompatActivity {
 

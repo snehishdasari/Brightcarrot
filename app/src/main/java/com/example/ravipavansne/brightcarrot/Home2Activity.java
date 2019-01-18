@@ -1,5 +1,6 @@
 package com.example.ravipavansne.brightcarrot;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,6 +64,22 @@ public class Home2Activity extends AppCompatActivity
     private TextInputLayout t4;
     private Button banksave;
     private Button bankedit;
+    public boolean isServicesOk(){
+
+        int availability = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(Home2Activity.this);
+        if(availability==ConnectionResult.SUCCESS)
+            return true;
+        else if(GoogleApiAvailability.getInstance().isUserResolvableError(availability))
+        {
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(Home2Activity.this,availability,9001);
+
+        }
+        else
+        {
+            Toast.makeText(this, "unable to make map requests", Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +89,7 @@ public class Home2Activity extends AppCompatActivity
         getSupportActionBar().setTitle("Home");
         fuser = FirebaseAuth.getInstance().getCurrentUser();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(fuser.getUid()).child("Account details");
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(fuser.getUid()).child("Account details");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -328,11 +328,11 @@
 
 
 
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Confirm!"
-
+            android:text="Set Location!"
             android:background="@drawable/roundbutton"
             android:layout_marginLeft="60dp"
             android:textColor="#ffffff"

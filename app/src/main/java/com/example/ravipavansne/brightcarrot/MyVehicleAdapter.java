@@ -45,7 +45,9 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.Myve
     private TextInputLayout t3;
     private TextInputLayout t2;
     private TextInputLayout t4;
+    private int k;
     private Button banksave;
+    public static VehicleDetails currvehicle;
     private Button bankedit;
     private final View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
@@ -72,7 +74,7 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.Myve
 
     @Override
     public void onBindViewHolder(@NonNull MyVehicleAdapter.MyvehicleViewHolder myvehicleViewHolder, int i) {
-        final int k = i ;
+         k = i ;
         VehicleDetails vehicleDetails = list.get(i);
         myvehicleViewHolder.circleImageView.setImageResource(R.drawable.background);
         myvehicleViewHolder.name.setText(vehicleDetails.getVehiclename());
@@ -118,6 +120,8 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.Myve
                                             Intent intent = new Intent(context,AvailableConfirmActivity.class) ;
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                             intent.putExtra("item",k) ;
+                                            currvehicle = new VehicleDetails();
+                                            currvehicle = list.get(k);
                                             context.startActivity(intent);
 
                                         }

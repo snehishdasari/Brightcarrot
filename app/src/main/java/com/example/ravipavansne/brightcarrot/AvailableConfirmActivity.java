@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,7 +40,6 @@ public class AvailableConfirmActivity extends AppCompatActivity {
     private Spinner edate ;
     private Spinner emonth ;
     private Spinner eyear ;
-    private TextInputLayout addrtil ;
     private TextInputLayout phonetil ;
     private Button cnfm ;
     private ArrayList<String> months;
@@ -60,7 +60,7 @@ public class AvailableConfirmActivity extends AppCompatActivity {
     private DatabaseReference databaseReference ;
     private FirebaseUser firebaseUser ;
     private ArrayList<VehicleDetails> list ;
-    private VehicleDetails u ;
+    public static VehicleDetails u ;
     private int  f ;
     private String p ;
     private String sday ;
@@ -71,30 +71,32 @@ public class AvailableConfirmActivity extends AppCompatActivity {
     private String etime ;
     private String ownername ;
     private DatabaseReference databaseReference1;
-
+    public static boolean mapflag;
+    public static Vehicles dummy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_available_confirm);
-        final Intent intent=getIntent();
-         f = intent.getIntExtra("item",-1);
 
-        pricetil = (TextInputLayout) findViewById(R.id.priceconfirm) ;
-        shour= (Spinner) findViewById(R.id.spinnershour) ;
-        smin= (Spinner) findViewById(R.id.spinnersmin) ;
-        sdate= (Spinner) findViewById(R.id.spinnersdate) ;
-        smonth= (Spinner) findViewById(R.id.spinnersmonth) ;
-        syear= (Spinner) findViewById(R.id.spinnersyear) ;
-        ehour= (Spinner) findViewById(R.id.spinnerehour) ;
-        emin = (Spinner) findViewById(R.id.spinneremin) ;
-        edate= (Spinner) findViewById(R.id.spinneredate) ;
-        emonth= (Spinner) findViewById(R.id.spinneremonth) ;
-        eyear= (Spinner) findViewById(R.id.spinnereyear) ;
-        addrtil = (TextInputLayout)findViewById(R.id.addrconfirm);
-        phonetil = (TextInputLayout)findViewById(R.id.phoneconfirm);
-        list = new ArrayList<>() ;
-        cnfm = (Button) findViewById(R.id.confirm) ;
+        mapflag = false;
+        final Intent intent = getIntent();
+        f = intent.getIntExtra("item", -1);
+
+        pricetil = (TextInputLayout) findViewById(R.id.priceconfirm);
+        shour = (Spinner) findViewById(R.id.spinnershour);
+        smin = (Spinner) findViewById(R.id.spinnersmin);
+        sdate = (Spinner) findViewById(R.id.spinnersdate);
+        smonth = (Spinner) findViewById(R.id.spinnersmonth);
+        syear = (Spinner) findViewById(R.id.spinnersyear);
+        ehour = (Spinner) findViewById(R.id.spinnerehour);
+        emin = (Spinner) findViewById(R.id.spinneremin);
+        edate = (Spinner) findViewById(R.id.spinneredate);
+        emonth = (Spinner) findViewById(R.id.spinneremonth);
+        eyear = (Spinner) findViewById(R.id.spinnereyear);
+        phonetil = (TextInputLayout) findViewById(R.id.phoneconfirm);
+        list = new ArrayList<>();
+        cnfm = (Button) findViewById(R.id.confirm);
 
 
         days = new ArrayList<>();
@@ -105,20 +107,18 @@ public class AvailableConfirmActivity extends AppCompatActivity {
         }
 
 
-        mins = new ArrayList<>() ;
+        mins = new ArrayList<>();
         mins.add("min");
-        for(int i=0;i<61;i+=5)
-        {
-            String k = String.valueOf(i) ;
-            mins.add(k) ;
+        for (int i = 0; i < 61; i += 5) {
+            String k = String.valueOf(i);
+            mins.add(k);
         }
 
-        hours = new ArrayList<>() ;
+        hours = new ArrayList<>();
         hours.add("hour");
-        for(int i=1;i<25;i++)
-        {
-            String k = String.valueOf(i) ;
-            hours.add(k) ;
+        for (int i = 1; i < 25; i++) {
+            String k = String.valueOf(i);
+            hours.add(k);
         }
 
         months = new ArrayList<>();
@@ -153,11 +153,11 @@ public class AvailableConfirmActivity extends AppCompatActivity {
         monthadapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, months);
         yearadapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, years);
 
-        houradapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,hours) ;
-        minadapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,mins) ;
+        houradapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, hours);
+        minadapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, mins);
 
-        houradapter1 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,hours) ;
-        minadapter1 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,mins) ;
+        houradapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, hours);
+        minadapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, mins);
 
         sdate.setAdapter(dayadapter);
         edate.setAdapter(dayadapter1);
@@ -167,61 +167,16 @@ public class AvailableConfirmActivity extends AppCompatActivity {
         eyear.setAdapter(yearadapter1);
 
         shour.setAdapter(houradapter);
-        ehour.setAdapter(houradapter1) ;
+        ehour.setAdapter(houradapter1);
         smin.setAdapter(minadapter);
         emin.setAdapter(minadapter1);
 
 
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-        u=MyvehiclesActivity.arrayList.get(f);
-        if(u.getAvailability().equals("true")) {
-            databaseReference = FirebaseDatabase.getInstance().getReference().child("Available Vehicles").child(u.getType()).child(u.getVehicleid());
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    u = dataSnapshot.getValue(VehicleDetails.class);
-                        pricetil.getEditText().setText(u.getPrice());
-                        String a[] = u.getStartday().split("/");
-                        String b[] = u.getEndday().split("/");
-                        sdate.setSelection(dayadapter.getPosition(a[0]));
-                        smonth.setSelection(monthadapter.getPosition(a[1]));
-                        syear.setSelection(yearadapter.getPosition(a[2]));
-                        edate.setSelection(dayadapter1.getPosition(b[0]));
-                        emonth.setSelection(monthadapter1.getPosition(b[1]));
-                        eyear.setSelection(yearadapter1.getPosition(b[2]));
-                        addrtil.getEditText().setText(u.getContactaddress());
-                        String c[] = u.getStarttime().split(":");
-                        String d[] = u.getEndtime().split(":");
-                        smin.setSelection(minadapter.getPosition(c[0]));
-                        shour.setSelection(houradapter.getPosition(c[1]));
-                        emin.setSelection(minadapter1.getPosition(d[0]));
-                        ehour.setSelection(houradapter1.getPosition(d[1]));
-                        phonetil.getEditText().setText(u.getContactphone());
-                        DatabaseReference d1 = FirebaseDatabase.getInstance().getReference().child("Users").child(u.getOwnerid()).child("Account details");
-                    d1.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            ownername = dataSnapshot.child("firstname").getValue().toString();
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
-                }
+        DatabaseReference d1 = FirebaseDatabase.getInstance().getReference().child("Users").child(MyVehicleAdapter.currvehicle.getOwnerid()).child("Account details");
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-
-        }
-        DatabaseReference d1 = FirebaseDatabase.getInstance().getReference().child("Users").child(u.getOwnerid()).child("Account details");
         d1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -234,61 +189,40 @@ public class AvailableConfirmActivity extends AppCompatActivity {
 
             }
         });
+
+
         cnfm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                p = pricetil.getEditText().getText().toString() ;
-                stime = shour.getSelectedItem().toString() + ":" + smin.getSelectedItem().toString() ;
-                etime = ehour.getSelectedItem().toString() + ":" + emin.getSelectedItem().toString() ;
-                sday = sdate.getSelectedItem().toString() + "/" + smonth.getSelectedItem().toString() + "/" + syear.getSelectedItem().toString() ;
-                eday = edate.getSelectedItem().toString() + "/" + emonth.getSelectedItem().toString() + "/" + eyear.getSelectedItem().toString() ;
-                adrs= addrtil.getEditText().getText().toString() ;
-                contact = phonetil.getEditText().getText().toString() ;
-                u.setPrice(p);
-                u.setStartday(sday);
-                u.setStarttime(stime);
-                u.setEndday(eday);
-                u.setEndtime(etime);
-                u.setContactaddress(adrs);
-                u.setContactphone(contact);
-                u.setAvailability("true");
-                u.setOwnername(ownername);
-                u.setBooked("false");
+                p = pricetil.getEditText().getText().toString();
+                stime = shour.getSelectedItem().toString() + ":" + smin.getSelectedItem().toString();
+                etime = ehour.getSelectedItem().toString() + ":" + emin.getSelectedItem().toString();
+                sday = sdate.getSelectedItem().toString() + "/" + smonth.getSelectedItem().toString() + "/" + syear.getSelectedItem().toString();
+                eday = edate.getSelectedItem().toString() + "/" + emonth.getSelectedItem().toString() + "/" + eyear.getSelectedItem().toString();
+                //       adrs= addrtil.getEditText().getText().toString() ;
 
-                FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Vehicle Details")
-                        .child(u.getVehicleid()).child("availability").setValue("true").addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                   //
-                    }
-                });
+                contact = phonetil.getEditText().getText().toString();
+                MyVehicleAdapter.currvehicle.setPrice(p);
+                MyVehicleAdapter.currvehicle.setStartday(sday);
+                MyVehicleAdapter.currvehicle.setStarttime(stime);
+                MyVehicleAdapter.currvehicle.setEndday(eday);
+                MyVehicleAdapter.currvehicle.setEndtime(etime);
+                MyVehicleAdapter.currvehicle.setContactaddress(adrs);
+                MyVehicleAdapter.currvehicle.setContactphone(contact);
+                MyVehicleAdapter.currvehicle.setAvailability("true");
+                MyVehicleAdapter.currvehicle.setOwnername(ownername);
+                MyVehicleAdapter.currvehicle.setBooked("false");
+                MyVehicleAdapter.currvehicle.setContactaddress("shiy");
+                startActivity(new Intent(getApplicationContext(), MapsActivity.class));
 
-                 databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Available Vehicles").child(u.getType()).child(u.getVehicleid()) ;
-                databaseReference1.setValue(u).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful())
-                        {
-                            Toast.makeText(AvailableConfirmActivity.this,"Added to Market",Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(getApplicationContext(),Home2Activity.class);
-                            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(i);
-                            finish();
-                        }
-                        else
-                        {
-                            Toast.makeText(AvailableConfirmActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+               /* MyVehicleAdapter.currvehicle.setContactaddress(vehaddress);
+                MyVehicleAdapter.currvehicle.setLatitude(vehlat);
+                MyVehicleAdapter.currvehicle.setLongitude(vehlong);*/
 
             }
         });
-
-
-
 
 
 
