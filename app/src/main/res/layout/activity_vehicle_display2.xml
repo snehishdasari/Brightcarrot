@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/gradient"
+
     android:layout_height="match_parent"
     tools:context=".VehicleDisplay2Activity">
 
@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
-            android:background="@drawable/roundbuttonyellow"
+            android:background="@drawable/roundbuttonlightblue"
             >
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -36,15 +36,31 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:text=" TS08FN4860"
                 android:fontFamily="@font/acme"
                 android:id="@+id/vehicledisplay2heading"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/backvehicledisplay2"
-                android:background="@drawable/roundbuttonyellow"
+                android:background="@drawable/roundbuttonlightblue"
                 android:textColor="#000000"
                 android:textSize="25sp"
 
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CHAT"
+                android:fontFamily="@font/acme"
+                android:id="@+id/chatvehdisp2"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:layout_centerVertical="true"
+                android:textAlignment="textEnd"
+                android:layout_marginRight="15dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 />
 
 
@@ -100,7 +116,7 @@
                 android:textSize="16sp"
                 android:gravity="center"
                 android:layout_margin="10dp"
-                android:textColor="#ffffff"
+                android:textColor="#000000"
                 android:textAllCaps="true"
                 android:text="Color    :      Red "
                 android:fontFamily="@font/acme"/>
@@ -114,7 +130,7 @@
                 android:gravity="center"
                 android:textSize="16sp"
                 android:textAllCaps="true"
-                android:textColor="#ffffff"
+                android:textColor="#000000"
                 android:text="Fuel Used    :      Petrol"
                 android:fontFamily="@font/acme"/>
 
@@ -125,7 +141,7 @@
                 android:layout_height="40dp"
                 android:textSize="16sp"
                 android:gravity="center"
-                android:textColor="#ffffff"
+                android:textColor="#000000"
                 android:textAllCaps="true"
                 android:layout_margin="10dp"
                 android:text="Date Of Purchase    :      21/08/99 "
@@ -136,7 +152,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textSize="16sp"
-                android:textColor="#ffffff"
+                android:textColor="#000000"
                 android:textAllCaps="true"
                 android:gravity="center"
                 android:layout_margin="10dp"
@@ -149,7 +165,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textSize="16sp"
-                android:textColor="#ffffff"
+                android:textColor="#000000"
                 android:textAllCaps="true"
                 android:gravity="center"
                 android:layout_margin="10dp"
@@ -162,7 +178,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textSize="16sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textAllCaps="true"
             android:gravity="center"
             android:layout_margin="10dp"
@@ -174,7 +190,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textSize="16sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textAllCaps="true"
             android:gravity="center"
             android:layout_margin="10dp"
@@ -186,7 +202,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textSize="16sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textAllCaps="true"
             android:gravity="center"
             android:layout_margin="10dp"
@@ -198,7 +214,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textSize="16sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textAllCaps="true"
             android:gravity="center"
             android:layout_margin="10dp"
@@ -210,7 +226,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textSize="16sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textAllCaps="true"
             android:gravity="center"
             android:layout_margin="10dp"
@@ -222,7 +238,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textSize="16sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textAllCaps="true"
             android:gravity="center"
             android:layout_margin="10dp"
@@ -235,7 +251,7 @@
             android:gravity="center"
             android:text="RC PROOF"
             android:textSize="20sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:fontFamily="@font/acme"/>
         <RelativeLayout
             android:layout_width="300dp"
@@ -270,7 +286,7 @@
             android:text="BOoK this vehicle"
             android:background="@drawable/roundbutton"
             android:layout_marginLeft="60dp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:layout_marginRight="60dp"
             android:id="@+id/bookthisvehicle"
             android:layout_marginBottom="5dp"

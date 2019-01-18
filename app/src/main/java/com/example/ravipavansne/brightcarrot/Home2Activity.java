@@ -22,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -49,10 +50,14 @@ public class Home2Activity extends AppCompatActivity
     private userdetails u1;
     private String oldpass;
     String flag;
+    String nameuser ;
+    String emailuser ;
     private ProgressDialog progressDialog;
     private DatabaseReference databaseReference;
     private ProgressDialog pd;
     private BankDetails bankDetails;
+    private TextView hellouser ;
+    private TextView email ;
     private TextInputLayout t1;
     private TextInputLayout t3;
     private TextInputLayout t2;
@@ -84,7 +89,6 @@ public class Home2Activity extends AppCompatActivity
         getSupportActionBar().setTitle("Home");
         fuser = FirebaseAuth.getInstance().getCurrentUser();
 
-
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(fuser.getUid()).child("Account details");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -95,30 +99,6 @@ public class Home2Activity extends AppCompatActivity
             }
         });
 
-       pd = new ProgressDialog(this);
-       pd.setMessage("Please wait...");
-       pd.setTitle("Checking user details");
-       pd.setCanceledOnTouchOutside(false);
-       pd.show();
-       databaseReference.addValueEventListener(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-               flag = dataSnapshot.child("flag").getValue().toString();
-               if(!(flag.equals("true")))
-               {
-                   Intent i = new Intent(getApplicationContext(),SignupActivity.class);
-                   i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-                   startActivity(i);
-                   finish();
-               }
-               pd.dismiss();
-           }
-           @Override
-           public void onCancelled(@NonNull DatabaseError databaseError) {
-
-           }
-       });
 
 
 
@@ -137,6 +117,68 @@ public class Home2Activity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerview = navigationView.getHeaderView(0) ;
+        hellouser = (TextView) headerview.findViewById(R.id.hellouser) ;
+        email = (TextView) headerview.findViewById(R.id.emailshow) ;
+
+        pd = new ProgressDialog(this);
+        pd.setMessage("Please wait...");
+        pd.setTitle("Checking user details");
+        pd.setCanceledOnTouchOutside(false);
+        pd.show();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                flag = dataSnapshot.child("flag").getValue().toString();
+                if(!(flag.equals("true")))
+                {
+                    Intent i = new Intent(getApplicationContext(),SignupActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                    finish();
+                }
+                else {
+                    nameuser = dataSnapshot.child("firstname").getValue().toString() ;
+                    emailuser = dataSnapshot.child("email").getValue().toString() ;
+                    hellouser.setText(nameuser);
+                    email.setText(emailuser);
+                }
+
+                pd.dismiss();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+       /*DatabaseReference dr1 = FirebaseDatabase.getInstance().getReference().child("Users").child(fuser.getUid()).child("Account details") ;
+        dr1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                nameuser = dataSnapshot.child("firstname").getValue().toString() ;
+                emailuser = dataSnapshot.child("email").getValue().toString() ;
+                hellouser.setText(nameuser);
+                email.setText(emailuser);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
+
+
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 
     @Override

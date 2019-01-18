@@ -49,7 +49,10 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
     private FirebaseUser firebaseUser ;
     private ImageView vehimage ;
     private ImageView rcimage ;
-
+    private TextView chat ;
+    private String oname ;
+    private String myname ;
+    private String vid ;
     private DatabaseReference databaseReference ;
 
     private List<VehicleDetails> list ;
@@ -57,7 +60,6 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
     private CircleImageView b ;
     private ProgressBar progressBar;
     private ProgressBar progressBar2 ;
-    private  String vid ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +82,7 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
         numb = (TextView)findViewById(R.id.phonevehdisp2) ;
         booked = (Button) findViewById(R.id.bookthisvehicle) ;
         owner = (TextView)findViewById(R.id.ownervehdisp2) ;
+        chat = (TextView) findViewById(R.id.chatvehdisp2) ;
         rcimage = (ImageView) findViewById(R.id.rcimagesvehdisp2) ;
         progressBar = (ProgressBar)findViewById(R.id.vehimgprogbar2);
         progressBar2 = (ProgressBar) findViewById(R.id.rcimgpbvehdisp2) ;
@@ -99,6 +102,7 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
         vehimage.setScaleType(ImageView.ScaleType.CENTER_CROP);
         rcimage.setScaleType(ImageView.ScaleType.CENTER_CROP);
         String n = VehicleAdapter.displayvehicle.getVehiclename() ;
+        vid = VehicleAdapter.displayvehicle.getVehicleid() ;
         name.setText("Name   :   "+n);
         color.setText("Colour   :   "+VehicleAdapter.displayvehicle.getColorv());
         kms.setText("Kilometers travelled   :   "+VehicleAdapter.displayvehicle.getNokms());
@@ -129,10 +133,11 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
                 }
                 else {
                     String category = VehicleAdapter.displayvehicle.getType();
-                    String vid = VehicleAdapter.displayvehicle.getVehicleid();
+
                     VehicleAdapter.displayvehicle.setBooked("true");
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
                     databaseReference.child("Available Vehicles").child(category).child(vid).removeValue();
+                    VehicleAdapter.displayvehicle.setBookedby(firebaseUser.getUid());
                     databaseReference.child("Users").child(VehicleAdapter.displayvehicle.getOwnerid()).child("Booking Details")
                             .child("My Rentals").child(vid).setValue(VehicleAdapter.displayvehicle);
 
@@ -155,6 +160,55 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
                 }
 
             }
+        });
+
+
+
+        chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                DatabaseReference databaseReferenc = FirebaseDatabase.getInstance().getReference().child("Users").child(VehicleAdapter.displayvehicle.getOwnerid()).child("Account details")
+                        ;
+
+                databaseReferenc.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        oname  = dataSnapshot.child("firstname").getValue().toString() ;
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                }) ;
+
+                DatabaseReference dm  = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Account details").child("firstname") ;
+                dm.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        myname = dataSnapshot.getValue().toString() ;
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+                Intent chatIntent  = new Intent(VehicleDisplay2Activity.this,ChatActivity.class) ;
+                chatIntent.putExtra("ownername",oname) ;
+                chatIntent.putExtra("myname",myname) ;
+
+                chatIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(chatIntent);
+                finish();
+
+                                    }
         });
 
     }

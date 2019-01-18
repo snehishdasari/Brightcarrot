@@ -9,7 +9,7 @@ public class userdetails {
     private String password;
 
 
-
+    private String loggedby ;
     private String phonenumber;
     private String birthday;
     private String birthmonth;
@@ -19,6 +19,14 @@ public class userdetails {
     private String email ;
     private boolean flag;
     private String id;
+
+    public String getLoggedby() {
+        return loggedby;
+    }
+
+    public void setLoggedby(String loggedby) {
+        this.loggedby = loggedby;
+    }
 
     public userdetails(String firstname, String lastname, String address, String phonenumber, String birthday, String birthmonth, String birthyear, String state, String city, String email, boolean flag) {
         this.firstname = firstname;
