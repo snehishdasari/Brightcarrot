@@ -52,6 +52,7 @@ public class Home2Activity extends AppCompatActivity
     String flag;
     String nameuser ;
     String emailuser ;
+    int x ;
     private ProgressDialog progressDialog;
     private DatabaseReference databaseReference;
     private ProgressDialog pd;
