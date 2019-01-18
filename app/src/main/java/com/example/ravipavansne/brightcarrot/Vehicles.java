@@ -2,78 +2,118 @@ package com.example.ravipavansne.brightcarrot;
 
 public class Vehicles {
 
-    String name ;
-    String desc ;
-    int price ;
-    int image ;
-    String startdate ;
-    String enddate ;
-    int rating ;
-    private VehicleDetails v;
+    private String price,starthr,startmin,startday,startmon,startyr;
+    private String endhr,endmin,endday,endmon,endyr,contact;
 
-    public Vehicles(String name, String desc, int price, int image, String startdate, String enddate, int rating) {
-        this.name = name;
-        this.desc = desc;
+    public Vehicles(String price, String starthr, String startmin, String startday, String startmon, String startyr, String endhr, String endmin, String endday, String endmon, String endyr, String contact) {
         this.price = price;
-        this.image = image;
-        this.startdate = startdate;
-        this.enddate = enddate;
-        this.rating = rating;
+        this.starthr = starthr;
+        this.startmin = startmin;
+        this.startday = startday;
+        this.startmon = startmon;
+        this.startyr = startyr;
+        this.endhr = endhr;
+        this.endmin = endmin;
+        this.endday = endday;
+        this.endmon = endmon;
+        this.endyr = endyr;
+        this.contact = contact;
     }
+    public Vehicles(){}
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public int getImage() {
-        return image;
+    public String getStarthr() {
+        return starthr;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setStarthr(String starthr) {
+        this.starthr = starthr;
     }
 
-    public String getStartdate() {
-        return startdate;
+    public String getStartmin() {
+        return startmin;
     }
 
-    public void setStartdate(String startdate) {
-        this.startdate = startdate;
+    public void setStartmin(String startmin) {
+        this.startmin = startmin;
     }
 
-    public String getEnddate() {
-        return enddate;
+    public String getStartday() {
+        return startday;
     }
 
-    public void setEnddate(String enddate) {
-        this.enddate = enddate;
+    public void setStartday(String startday) {
+        this.startday = startday;
     }
 
-    public int getRating() {
-        return rating;
+    public String getStartmon() {
+        return startmon;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setStartmon(String startmon) {
+        this.startmon = startmon;
+    }
+
+    public String getStartyr() {
+        return startyr;
+    }
+
+    public void setStartyr(String startyr) {
+        this.startyr = startyr;
+    }
+
+    public String getEndhr() {
+        return endhr;
+    }
+
+    public void setEndhr(String endhr) {
+        this.endhr = endhr;
+    }
+
+    public String getEndmin() {
+        return endmin;
+    }
+
+    public void setEndmin(String endmin) {
+        this.endmin = endmin;
+    }
+
+    public String getEndday() {
+        return endday;
+    }
+
+    public void setEndday(String endday) {
+        this.endday = endday;
+    }
+
+    public String getEndmon() {
+        return endmon;
+    }
+
+    public void setEndmon(String endmon) {
+        this.endmon = endmon;
+    }
+
+    public String getEndyr() {
+        return endyr;
+    }
+
+    public void setEndyr(String endyr) {
+        this.endyr = endyr;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }

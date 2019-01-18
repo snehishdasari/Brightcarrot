@@ -287,25 +287,8 @@
 
         </LinearLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:textColorHint="#ffffff"
-            android:layout_margin="15dp"
-            android:id="@+id/addrconfirm"
-            android:layout_height="60dp">
 
 
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:textColorHint="#ffffff"
-                android:textColor="#ffffff"
-                android:textSize="18sp"
-                android:drawableLeft="@drawable/ic_home_black_24dp"
-                android:drawablePadding="12dp"
-                android:fontFamily="@font/acme"
-                android:hint="Vehicle Pickup Address"
-                android:layout_height="match_parent" />
-        </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -329,10 +312,11 @@
 
 
 
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Confirm!"
+            android:text="Set Location!"
             android:background="@drawable/roundbutton"
             android:layout_marginLeft="60dp"
             android:textColor="#ffffff"
