@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context=".LoginFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+
+            android:src="@drawable/logo2"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="100dp"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+
+           >
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:fontFamily="@font/acme"
+                android:maxLines="2"
+                android:drawableLeft="@drawable/ic_email_black_24dp"
+                android:drawablePadding="12dp"
+                android:layout_margin="12dp"
+                android:id="@+id/loginemail"
+                android:textColor="@android:color/black"
+
+                android:hint="Email"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            >
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:inputType="textPassword"
+                android:layout_margin="12dp"
+                android:id="@+id/loginpass"
+                android:maxLines="1"
+                android:fontFamily="@font/acme"
+                android:drawableLeft="@drawable/ic_lock_black_24dp"
+                android:drawablePadding="12dp"
+                android:textColor="@android:color/black"
+
+                android:hint="Password"/>
+        </android.support.design.widget.TextInputLayout>
+
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/roundbutton"
+                android:fontFamily="@font/acme"
+                android:id="@+id/loginbutt"
+                android:textSize="18sp"
+                android:text="Login"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Not a User? Signup"
+            android:textSize="18sp"
+            android:textStyle="italic|bold"
+            android:id="@+id/notuser"
+            android:fontFamily="@font/acme"
+            android:textAlignment="center"
+            android:textColor="#000000"/>
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

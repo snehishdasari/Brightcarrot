@@ -74,14 +74,20 @@ public class MainActivity extends AppCompatActivity {
         skipbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, signup2Activity.class));
+                startActivity(new Intent(MainActivity.this, StartActivity.class));
             }
         });
 
         nextbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                int cu = viewPager.getCurrentItem() +1 ;
+                if(cu < layouts.length)
+                {
+                    viewPager.setCurrentItem(cu);
+                }
+                else
+                startActivity(new Intent(MainActivity.this, StartActivity.class));
             }
         });
         setDotStatus(0);

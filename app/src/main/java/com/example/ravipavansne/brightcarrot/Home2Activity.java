@@ -207,17 +207,7 @@ public class Home2Activity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.sortbyavailabilty) {
-            return true;
-        }
-        else if(id== R.id.sortbyloc)
-        {
-            return true ;
-        }
-        else if(id==R.id.sortbyprice)
-        {
-            return true ;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -320,10 +310,7 @@ public class Home2Activity extends AppCompatActivity
             startActivity(new Intent(Home2Activity.this,ChatlistActivity.class));
 
         }
-        else if(id== R.id.previousrides_nav)
-        {
-            startActivity(new Intent(Home2Activity.this,PreviousridesActivity.class));
-        }
+
         else if(id== R.id.myvehicles_nav)
         {
             startActivity(new Intent(Home2Activity.this,MyvehiclesActivity.class));
