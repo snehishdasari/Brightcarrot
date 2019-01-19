@@ -315,6 +315,11 @@ public class Home2Activity extends AppCompatActivity
             startActivity(new Intent(Home2Activity.this,Bookings.class));
 
         }
+        else if(id==R.id.mychats_nav){
+
+            startActivity(new Intent(Home2Activity.this,ChatlistActivity.class));
+
+        }
         else if(id== R.id.previousrides_nav)
         {
             startActivity(new Intent(Home2Activity.this,PreviousridesActivity.class));

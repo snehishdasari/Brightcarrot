@@ -13,6 +13,10 @@
             android:title="Change Password"
             />
         <item
+            android:id="@+id/mychats_nav"
+            android:title="My Chats"
+            />
+        <item
             android:id="@+id/bank_nav"
             android:title="Bank Details"
             />

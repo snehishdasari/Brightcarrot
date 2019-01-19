@@ -286,25 +286,7 @@
 
         </LinearLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
 
-            android:layout_margin="15dp"
-            android:id="@+id/addrconfirm"
-            android:layout_height="60dp">
-
-
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:drawableLeft="@drawable/ic_home_black_24dp"
-                android:drawablePadding="12dp"
-                android:fontFamily="@font/acme"
-                android:hint="Vehicle Pickup Address"
-                android:layout_height="match_parent" />
-        </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -325,6 +307,63 @@
                 android:hint="Contact Details(Mobile number)"
                 android:layout_height="match_parent" />
         </android.support.design.widget.TextInputLayout>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_margin="15dp"
+           android:orientation="vertical">
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Vehicle Pickup Address"
+               android:fontFamily="@font/acme"
+               android:drawablePadding="12dp"
+               android:textSize="18sp"
+               android:textColor="#000000"
+               android:drawableLeft="@drawable/ic_home_black_24dp"
+               />
+           <ImageView
+               android:layout_width="100dp"
+               android:layout_height="100dp"
+               android:layout_gravity="center"
+               android:src="@drawable/map"/>
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:gravity="center"
+
+               android:textSize="12sp"
+               android:textStyle="italic"
+               android:fontFamily="@font/acme"
+               android:textColor="#000000"
+               android:id="@+id/vehlatlng"/>
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textSize="19sp"
+                android:text="please locate the Address!!"
+               android:layout_margin="10dp"
+               android:gravity="center"
+               android:fontFamily="@font/acme"
+               android:textColor="#000000"
+               android:id="@+id/addrconfirm"/>
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:fontFamily="@font/acme"
+               android:textColor="#000000"
+               android:text="Set Location!"
+               android:id="@+id/setlocation"
+               android:layout_margin="10dp"
+               android:paddingRight="20dp"
+               android:textSize="18sp"
+               android:paddingLeft="20dp"
+               android:background="@drawable/roundbuttonblue"/>
+
+
+
+       </LinearLayout>
 
 
 
@@ -332,7 +371,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Set Location!"
+            android:text="Add to Market"
             android:background="@drawable/roundbutton"
             android:layout_marginLeft="60dp"
             android:textColor="#ffffff"

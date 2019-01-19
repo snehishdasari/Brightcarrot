@@ -8,10 +8,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -24,13 +22,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatActivity extends AppCompatActivity {
-
+public class ChatActivity2 extends AppCompatActivity {
 
     private FirebaseUser firebaseUser ;
     private ScrollView scrollView ;
@@ -46,29 +42,33 @@ public class ChatActivity extends AppCompatActivity {
     private MessageAdapter messageAdapter;
     private TextView chatname;
     private ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        typemessage = (EditText)findViewById(R.id.typemessage);
-        send = (ImageView)findViewById(R.id.sendmessage);
-        delete = (ImageView)findViewById(R.id.deletechat);
+        setContentView(R.layout.activity_chat2);
 
-        listView = (ListView)findViewById(R.id.chatlistview);
-        chatname = (TextView)findViewById(R.id.chatname);
-        chatname.setText(VehicleAdapter.displayvehicle.getOwnername());
-        back = (ImageView)findViewById(R.id.chatback);
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        typemessage = (EditText)findViewById(R.id.typemessage2);
+        send = (ImageView)findViewById(R.id.sendmessage2);
+        delete = (ImageView)findViewById(R.id.deletechat2);
+
+        listView = (ListView)findViewById(R.id.chatlistview2);
+        chatname = (TextView)findViewById(R.id.chatname2);
+        chatname.setText(ChatlistActivity.currentchatter.getFirstname());
+
+        back = (ImageView)findViewById(R.id.chatback2);
         messageList = new ArrayList<>();
         messageAdapter = new MessageAdapter(this,messageList);
         listView.setAdapter(messageAdapter);
-        dr1 = FirebaseDatabase.getInstance().getReference().child("Users").child(VehicleAdapter.displayvehicle.getOwnerid()).child("Chats").child(firebaseUser.getUid());
+        dr1 = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Chats").child(ChatlistActivity.currentchatter.getId());
 
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity2.this);
                 builder.setMessage("Are you sure you want to delete the chat ??");
                 builder.setTitle("DELETE CHAT");
 
@@ -77,13 +77,13 @@ public class ChatActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dr1.removeValue();
                         messageAdapter.clear();
-                        Toast.makeText(ChatActivity.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChatActivity2.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(ChatActivity.this, "Okay", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChatActivity2.this, "Okay", Toast.LENGTH_SHORT).show();
                     }
                 });
                 AlertDialog alertDialog = builder.create();
@@ -106,7 +106,7 @@ public class ChatActivity extends AppCompatActivity {
                     typemessage.setText("");
                 }
                 else{
-                    Toast.makeText(ChatActivity.this, "Please Type a Message", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChatActivity2.this, "Please Type a Message", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -142,6 +142,5 @@ public class ChatActivity extends AppCompatActivity {
         });
 
     }
-
 
 }

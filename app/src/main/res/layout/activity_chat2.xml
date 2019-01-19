@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ChatActivity">
+    tools:context=".ChatActivity2">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:id="@+id/chatback"
+            android:id="@+id/chatback2"
             android:src="@drawable/ic_arrow_back_black_24dp"/>
         <TextView
             android:layout_width="wrap_content"
@@ -25,8 +25,8 @@
             android:layout_centerVertical="true"
             android:textSize="25sp"
             android:layout_margin="7dp"
-            android:layout_toRightOf="@id/chatback"
-            android:id="@+id/chatname"
+            android:layout_toRightOf="@id/chatback2"
+            android:id="@+id/chatname2"
             android:textColor="#000000"
             android:text="Chatter"/>
         <ImageView
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_delete_black_24dp"
             android:layout_alignParentRight="true"
-            android:id="@+id/deletechat"
+            android:id="@+id/deletechat2"
             android:layout_centerVertical="true"/>
 
     </RelativeLayout>
@@ -45,7 +45,7 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/chatlistview"
+            android:id="@+id/chatlistview2"
             android:layout_weight="1">
 
         </ListView>
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:background="#B2EBF2"
             android:layout_margin="10dp"
-            android:layout_alignParentBottom="true">
+            >
 
             <EditText
                 android:layout_width="350dp"
@@ -64,7 +64,7 @@
                 android:textColor="#000000"
                 android:maxLines="1"
                 android:textSize="25sp"
-                android:id="@+id/typemessage"
+                android:id="@+id/typemessage2"
                 android:drawableLeft="@drawable/ic_message_black_24dp"
                 android:fontFamily="@font/acme"/>
             <ImageView
@@ -73,7 +73,7 @@
                 android:src="@drawable/ic_send_black_24dp"
                 android:layout_alignParentRight="true"
                 android:layout_margin="1dp"
-                android:id="@+id/sendmessage"
+                android:id="@+id/sendmessage2"
                 android:layout_centerVertical="true"/>
 
 

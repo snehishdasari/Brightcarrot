@@ -35,6 +35,7 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
     private TextView head ;
     private TextView name ;
     private TextView color ;
+    private TextView pickup;
     private TextView kms ;
     private TextView dop ;
     private TextView psd ;
@@ -50,6 +51,7 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
     private ImageView vehimage ;
     private ImageView rcimage ;
     private TextView chat ;
+    private TextView vehlatlng;
     private String oname ;
     private String myname ;
     private String vid ;
@@ -73,6 +75,8 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
         kms = (TextView) findViewById(R.id.kmsvehdisp2) ;
         dop = (TextView) findViewById(R.id.dopvehdisp2) ;
         psd = (TextView) findViewById(R.id.psdvehdisp2) ;
+        vehlatlng = (TextView)findViewById(R.id.vehlalng1);
+        pickup = (TextView)findViewById(R.id.pickuplocation);
         fuelused = (TextView) findViewById(R.id.fuelvehdisp2) ;
         vehimage = (ImageView) findViewById(R.id.imvehdisp2) ;
         price = (TextView) findViewById(R.id.pricevehdisp2) ;
@@ -99,6 +103,12 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
                 finish();
             }
         });
+        pickup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),MapBoxActivity.class));
+            }
+        });
         vehimage.setScaleType(ImageView.ScaleType.CENTER_CROP);
         rcimage.setScaleType(ImageView.ScaleType.CENTER_CROP);
         String n = VehicleAdapter.displayvehicle.getVehiclename() ;
@@ -114,6 +124,7 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
         GlideApp.with(VehicleDisplay2Activity.this).load(VehicleAdapter.displayvehicle.getVehicleimage()).into(vehimage);
         progressBar.setVisibility(View.GONE);
         price.setText("Price   :   "+VehicleAdapter.displayvehicle.getPrice());
+        vehlatlng.setText(VehicleAdapter.displayvehicle.getLatitude().toString()+" , "+VehicleAdapter.displayvehicle.getLongitude().toString());
         from.setText("Available from   :   "+VehicleAdapter.displayvehicle.getStartday() +" "+VehicleAdapter.displayvehicle.getStarttime());
         to.setText("Available till   :   "+VehicleAdapter.displayvehicle.getEndday() +" "+VehicleAdapter.displayvehicle.getEndtime());
         addr.setText("Available at  : "+VehicleAdapter.displayvehicle.getContactaddress());

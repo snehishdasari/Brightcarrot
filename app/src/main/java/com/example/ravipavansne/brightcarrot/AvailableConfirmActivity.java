@@ -57,10 +57,13 @@ public class AvailableConfirmActivity extends AppCompatActivity {
     private ArrayAdapter<String> minadapter ;
     private ArrayAdapter<String> houradapter1 ;
     private ArrayAdapter<String> minadapter1 ;
+    private TextView setlocation;
     private DatabaseReference databaseReference ;
     private FirebaseUser firebaseUser ;
     private ArrayList<VehicleDetails> list ;
     public static VehicleDetails u ;
+    private TextView vehlatlng;
+    private TextView vehaddress;
     private int  f ;
     private String p ;
     private String sday ;
@@ -85,6 +88,8 @@ public class AvailableConfirmActivity extends AppCompatActivity {
 
         pricetil = (TextInputLayout) findViewById(R.id.priceconfirm);
         shour = (Spinner) findViewById(R.id.spinnershour);
+        vehlatlng = (TextView)findViewById(R.id.vehlatlng);
+        vehaddress = (TextView)findViewById(R.id.addrconfirm);
         smin = (Spinner) findViewById(R.id.spinnersmin);
         sdate = (Spinner) findViewById(R.id.spinnersdate);
         smonth = (Spinner) findViewById(R.id.spinnersmonth);
@@ -95,6 +100,7 @@ public class AvailableConfirmActivity extends AppCompatActivity {
         emonth = (Spinner) findViewById(R.id.spinneremonth);
         eyear = (Spinner) findViewById(R.id.spinnereyear);
         phonetil = (TextInputLayout) findViewById(R.id.phoneconfirm);
+        setlocation = (TextView)findViewById(R.id.setlocation);
         list = new ArrayList<>();
         cnfm = (Button) findViewById(R.id.confirm);
 
@@ -170,8 +176,48 @@ public class AvailableConfirmActivity extends AppCompatActivity {
         ehour.setAdapter(houradapter1);
         smin.setAdapter(minadapter);
         emin.setAdapter(minadapter1);
-
-
+        if(MyVehicleAdapter.currvehicle.getPrice()!=null)
+        {
+            pricetil.getEditText().setText(MyVehicleAdapter.currvehicle.getPrice().toString());
+        }
+        if(MyVehicleAdapter.currvehicle.getContactphone()!=null)
+        {
+            phonetil.getEditText().setText(MyVehicleAdapter.currvehicle.getContactphone().toString());
+        }
+        if(MyVehicleAdapter.currvehicle.getStartday()!=null)
+        {
+            String a[] = MyVehicleAdapter.currvehicle.getStartday().split("/");
+            sdate.setSelection(dayadapter.getPosition(a[0]));
+            smonth.setSelection(monthadapter.getPosition(a[1]));
+            syear.setSelection(yearadapter.getPosition(a[2]));
+        }
+        if(MyVehicleAdapter.currvehicle.getEndday()!=null)
+        {
+            String a[] = MyVehicleAdapter.currvehicle.getEndday().split("/");
+            edate.setSelection(dayadapter1.getPosition(a[0]));
+            emonth.setSelection(monthadapter1.getPosition(a[1]));
+            eyear.setSelection(yearadapter1.getPosition(a[2]));
+        }
+        if(MyVehicleAdapter.currvehicle.getStarttime()!=null)
+        {
+            String a[] = MyVehicleAdapter.currvehicle.getStarttime().split(":");
+            shour.setSelection(houradapter.getPosition(a[0]));
+            smin.setSelection(minadapter.getPosition(a[1]));
+        }
+        if(MyVehicleAdapter.currvehicle.getEndtime()!=null)
+        {
+            String a[] = MyVehicleAdapter.currvehicle.getEndtime().split(":");
+            ehour.setSelection(houradapter1.getPosition(a[0]));
+            emin.setSelection(minadapter1.getPosition(a[1]));
+        }
+        if(MyVehicleAdapter.currvehicle.getLatitude()!=null)
+        {
+            vehlatlng.setText(MyVehicleAdapter.currvehicle.getLatitude().toString()+" , "+MyVehicleAdapter.currvehicle.getLongitude());
+        }
+        if(MyVehicleAdapter.currvehicle.getContactaddress()!=null)
+        {
+            vehaddress.setText(MyVehicleAdapter.currvehicle.getContactaddress().toString());
+        }
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
@@ -191,7 +237,7 @@ public class AvailableConfirmActivity extends AppCompatActivity {
         });
 
 
-        cnfm.setOnClickListener(new View.OnClickListener() {
+        setlocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -209,17 +255,58 @@ public class AvailableConfirmActivity extends AppCompatActivity {
                 MyVehicleAdapter.currvehicle.setStarttime(stime);
                 MyVehicleAdapter.currvehicle.setEndday(eday);
                 MyVehicleAdapter.currvehicle.setEndtime(etime);
-                MyVehicleAdapter.currvehicle.setContactaddress(adrs);
-                MyVehicleAdapter.currvehicle.setContactphone(contact);
-                MyVehicleAdapter.currvehicle.setAvailability("true");
+                MyVehicleAdapter.currvehicle.setContactphone(phonetil.getEditText().getText().toString());
                 MyVehicleAdapter.currvehicle.setOwnername(ownername);
                 MyVehicleAdapter.currvehicle.setBooked("false");
-                MyVehicleAdapter.currvehicle.setContactaddress("shiy");
+
                 startActivity(new Intent(getApplicationContext(), MapsActivity.class));
 
                /* MyVehicleAdapter.currvehicle.setContactaddress(vehaddress);
                 MyVehicleAdapter.currvehicle.setLatitude(vehlat);
                 MyVehicleAdapter.currvehicle.setLongitude(vehlong);*/
+
+            }
+        });
+        cnfm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                p = pricetil.getEditText().getText().toString();
+                stime = shour.getSelectedItem().toString() + ":" + smin.getSelectedItem().toString();
+                etime = ehour.getSelectedItem().toString() + ":" + emin.getSelectedItem().toString();
+                sday = sdate.getSelectedItem().toString() + "/" + smonth.getSelectedItem().toString() + "/" + syear.getSelectedItem().toString();
+                eday = edate.getSelectedItem().toString() + "/" + emonth.getSelectedItem().toString() + "/" + eyear.getSelectedItem().toString();
+                //       adrs= addrtil.getEditText().getText().toString() ;
+
+                contact = phonetil.getEditText().getText().toString();
+                MyVehicleAdapter.currvehicle.setPrice(p);
+                MyVehicleAdapter.currvehicle.setStartday(sday);
+                MyVehicleAdapter.currvehicle.setStarttime(stime);
+                MyVehicleAdapter.currvehicle.setEndday(eday);
+                MyVehicleAdapter.currvehicle.setEndtime(etime);
+                MyVehicleAdapter.currvehicle.setContactphone(phonetil.getEditText().getText().toString());
+                MyVehicleAdapter.currvehicle.setOwnername(ownername);
+                MyVehicleAdapter.currvehicle.setBooked("false");
+                DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Available Vehicles").child(MyVehicleAdapter.currvehicle.getType())
+                        .child(MyVehicleAdapter.currvehicle.getVehicleid());
+                FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Vehicle Details")
+                        .child(MyVehicleAdapter.currvehicle.getVehicleid()).child("Availability").setValue("true");
+                db.setValue(MyVehicleAdapter.currvehicle).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        if(task.isSuccessful())
+                        {
+                            Toast.makeText(AvailableConfirmActivity.this, "Added to market", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(getApplicationContext(),Home2Activity.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(i);
+                            finish();
+                        }
+
+                    }
+                });
+
 
             }
         });

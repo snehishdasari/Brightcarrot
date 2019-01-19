@@ -96,7 +96,10 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".ChatActivity" />
-        <activity android:name=".StartActivity"></activity>
+        <activity android:name=".StartActivity" />
+        <activity android:name=".MapBoxActivity" />
+        <activity android:name=".ChatActivity2" />
+        <activity android:name=".ChatlistActivity"></activity>
     </application>
 
 </manifest>

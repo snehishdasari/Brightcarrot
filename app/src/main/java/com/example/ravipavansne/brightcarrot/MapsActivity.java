@@ -313,23 +313,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     MyVehicleAdapter.currvehicle.setContactaddress(vehaddress);
                     MyVehicleAdapter.currvehicle.setLongitude(vehlon);
                     MyVehicleAdapter.currvehicle.setLatitude(vehlat);
-                    DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Available Vehicles").child(MyVehicleAdapter.currvehicle.getType())
-                            .child(MyVehicleAdapter.currvehicle.getVehicleid());
-                    db.setValue(MyVehicleAdapter.currvehicle).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-
-                            if(task.isSuccessful())
-                            {
-                                Toast.makeText(MapsActivity.this, "Added to market", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(getApplicationContext(),Home2Activity.class);
-                                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(i);
-                                finish();
-                            }
-
-                        }
-                    });
+                    startActivity(new Intent(getApplicationContext(),AvailableConfirmActivity.class));
                 }
             }
         });
