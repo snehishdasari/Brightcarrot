@@ -180,44 +180,14 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                DatabaseReference databaseReferenc = FirebaseDatabase.getInstance().getReference().child("Users").child(VehicleAdapter.displayvehicle.getOwnerid()).child("Account details")
-                        ;
-
-                databaseReferenc.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        oname  = dataSnapshot.child("firstname").getValue().toString() ;
-
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                }) ;
-
-                DatabaseReference dm  = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Account details").child("firstname") ;
-                dm.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        myname = dataSnapshot.getValue().toString() ;
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-
+                if(firebaseUser.getUid().equals(VehicleAdapter.displayvehicle.getOwnerid())){
+                    Toast.makeText(VehicleDisplay2Activity.this, "you can't chat with yourself", Toast.LENGTH_SHORT).show();
+                }
+                else{
                 Intent chatIntent  = new Intent(VehicleDisplay2Activity.this,ChatActivity.class) ;
-                chatIntent.putExtra("ownername",oname) ;
-                chatIntent.putExtra("myname",myname) ;
-
                 chatIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(chatIntent);
-                finish();
+                finish();}
 
                                     }
         });

@@ -59,11 +59,19 @@ public class ChatActivity extends AppCompatActivity {
         chatname = (TextView)findViewById(R.id.chatname);
         chatname.setText(VehicleAdapter.displayvehicle.getOwnername());
         back = (ImageView)findViewById(R.id.chatback);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),Home2Activity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+            }
+        });
         messageList = new ArrayList<>();
         messageAdapter = new MessageAdapter(this,messageList);
         listView.setAdapter(messageAdapter);
         dr1 = FirebaseDatabase.getInstance().getReference().child("Users").child(VehicleAdapter.displayvehicle.getOwnerid()).child("Chats").child(firebaseUser.getUid());
-
+        dr2 = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).child("Chats").child(VehicleAdapter.displayvehicle.getOwnerid());
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +111,7 @@ public class ChatActivity extends AppCompatActivity {
                 {
                     a = typemessage.getText().toString();
                     dr1.push().setValue(new Message(a,firebaseUser.getUid()));
+                    dr2.push().setValue(new Message(a,firebaseUser.getUid()));
                     typemessage.setText("");
                 }
                 else{

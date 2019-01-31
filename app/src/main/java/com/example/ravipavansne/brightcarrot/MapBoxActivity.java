@@ -36,7 +36,7 @@ import android.view.View;
 import android.widget.Button;
 import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher;
 
-public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallback, MapboxMap.OnMapClickListener, PermissionsListener {
+public class MapBoxActivity extends AppCompatActivity implements com.mapbox.mapboxsdk.maps.OnMapReadyCallback, MapboxMap.OnMapClickListener, PermissionsListener {
     private MapView mapView;
     // variables for adding location layer
     private MapboxMap mapboxMap;
@@ -103,7 +103,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
 
     private void getRoute(Point origin, Point destination) {
         NavigationRoute.builder(this)
-                .accessToken(Mapbox.getAccessToken())
+                .accessToken(getString(R.string.access_token))
                 .origin(origin)
                 .destination(destination)
                 .build()

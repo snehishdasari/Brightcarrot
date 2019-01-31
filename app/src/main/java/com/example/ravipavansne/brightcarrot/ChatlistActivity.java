@@ -53,7 +53,7 @@ public class ChatlistActivity extends AppCompatActivity {
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                chatterAdapter.clear();
                 for(DataSnapshot d: dataSnapshot.getChildren())
                 {
                     String s = d.getKey();
