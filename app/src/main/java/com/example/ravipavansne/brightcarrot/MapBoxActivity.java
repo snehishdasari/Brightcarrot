@@ -4,12 +4,13 @@ import java.util.List;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 // classes needed to initialize map
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 // classes needed to add the location component
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+
 import android.location.Location;
 import android.widget.Toast;
 import com.mapbox.mapboxsdk.geometry.LatLng;

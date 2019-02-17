@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/gradient"
     tools:context=".SignupActivity">
 
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:id="@+id/firstnameid"
-            android:textColorHint="#ffffff"
+
             android:layout_height="match_parent"
             android:layout_weight="1">
 
@@ -22,18 +21,18 @@
                 android:layout_height="match_parent"
                 android:hint="First Name"
                 android:maxLines="1"
-                android:textColor="#ffffff"
+                android:textColor="#000000"
                 android:drawableLeft="@drawable/ic_person_black_24dp"
                 android:drawablePadding="12dp"
                 android:layout_margin="12dp"
                 android:fontFamily="@font/acme"
-                android:textColorHint="#ffffff"/>
+                />
         </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColorHint="#ffffff"
+
         android:id="@+id/lastnameid"
         android:layout_weight="1">
 
@@ -43,12 +42,12 @@
             android:layout_height="match_parent"
             android:hint="Last Name"
             android:maxLines="1"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:drawableLeft="@drawable/ic_person_black_24dp"
             android:drawablePadding="12dp"
             android:layout_margin="12dp"
             android:fontFamily="@font/acme"
-            android:textColorHint="#ffffff"/>
+            />
     </android.support.design.widget.TextInputLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:drawablePadding="12dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="18dp"
@@ -78,14 +77,14 @@
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 android:id="@+id/spinneryear"
-                android:background="@android:color/white"
+                android:background="@android:drawable/btn_dropdown"
                 >
 
             </Spinner>
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/white"
+                android:background="@android:drawable/btn_dropdown"
                 android:layout_weight="1"
                 android:id="@+id/spinnermonth"
                 android:layout_margin="5dp"
@@ -97,7 +96,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/spinnerday"
-                android:background="@android:color/white"
+                android:background="@android:drawable/btn_dropdown"
                 android:layout_margin="5dp"
                 >
 
@@ -110,7 +109,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/phonenumberid"
-        android:textColorHint="#ffffff"
+
         android:layout_weight="1">
 
 
@@ -118,19 +117,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Phone number"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:maxLines="1"
             android:drawableLeft="@drawable/ic_phone_black_24dp"
             android:drawablePadding="12dp"
             android:layout_margin="12dp"
             android:fontFamily="@font/acme"
-            android:textColorHint="#ffffff"/>
+            />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/addressid"
-        android:textColorHint="#ffffff"
+
         android:layout_weight="1">
 
 
@@ -142,9 +141,9 @@
             android:drawablePadding="12dp"
             android:maxLines="1"
             android:layout_margin="12dp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:fontFamily="@font/acme"
-            android:textColorHint="#ffffff"/>
+            />
     </android.support.design.widget.TextInputLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -155,7 +154,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:drawablePadding="12dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="18dp"
@@ -174,7 +173,7 @@
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 android:id="@+id/spinnerstate"
-                android:background="@android:color/white"
+                android:background="@android:drawable/btn_dropdown"
                 >
 
             </Spinner>
@@ -183,7 +182,7 @@
                 android:id="@+id/spinnercity"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/white"
+                android:background="@android:drawable/btn_dropdown"
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 >

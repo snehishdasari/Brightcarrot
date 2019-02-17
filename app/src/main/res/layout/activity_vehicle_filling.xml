@@ -248,7 +248,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Number of Kilometres travelled"
-            android:drawableLeft="@drawable/dist"
+            android:drawableLeft="@drawable/distance"
 
             android:drawablePadding="12dp"
             android:maxLines="2"
@@ -285,7 +285,7 @@
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 android:id="@+id/spinneryearpsd"
-                android:background="@android:color/white"
+                android:background="@android:drawable/btn_dropdown"
                 >
 
             </Spinner>

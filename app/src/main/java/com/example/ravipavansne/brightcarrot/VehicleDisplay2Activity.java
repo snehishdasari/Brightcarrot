@@ -135,6 +135,8 @@ public class VehicleDisplay2Activity extends AppCompatActivity {
         progressBar2.setVisibility(View.GONE);
         if(index==0)
             booked.setVisibility(View.GONE);
+
+
         booked.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
