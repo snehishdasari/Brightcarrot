@@ -95,7 +95,7 @@ public class Home2Activity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Toast.makeText(Home2Activity.this, "Long press on any vehicle ", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(Home2Activity.this,MyvehiclesActivity.class));
             }
         });

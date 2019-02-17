@@ -226,9 +226,9 @@ public class SignupActivity extends AppCompatActivity {
 
                  flag1 = dataSnapshot.child("flag").getValue().toString();
                  pass1 = dataSnapshot.child("password").getValue().toString();
-                 logged = dataSnapshot.child("loggedby").getValue().toString() ;
+//                 logged = dataSnapshot.child("loggedby").getValue().toString() ;
 
-                if(flag1.equals("true") && logged!="facebook")
+                if(flag1.equals("true"))
                 {
                     String fname = dataSnapshot.child("firstname").getValue().toString() ;
                     String lname = dataSnapshot.child("lastname").getValue().toString() ;
@@ -316,8 +316,6 @@ public class SignupActivity extends AppCompatActivity {
                      u1 = new userdetails(fname, lname, addrs, mobileno, dayofbirth, monthofbirth, yearofbirth, state1, city1, email, flag);
                     u1.setId(firebaseUser.getUid());
                     u1.setFlag(true);
-
-                    if(logged!="facebook")
                     u1.setPassword(pass1);
 
 

@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="100dp"
+    android:background="#bb86fc"
 
     android:layout_margin="20dp">
     <de.hdodenhof.circleimageview.CircleImageView
@@ -9,6 +10,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/emoji2"
         android:id="@+id/chatterpp"
+
         android:layout_margin="5dp"
         android:layout_weight="3"/>
     <LinearLayout

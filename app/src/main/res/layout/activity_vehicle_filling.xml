@@ -30,7 +30,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vehicle Details"
+        android:text="Enter  Vehicle Details"
         android:fontFamily="@font/acme"
         android:id="@+id/vehiclefillingheading"
         android:layout_centerVertical="true"
